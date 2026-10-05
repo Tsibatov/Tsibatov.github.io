@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timur Sibatov · Technical Artist</title>
+<meta name="description" content="Senior Technical Artist. Worldbuilding tools, real-time water and weather, performance measurement and asset pipelines in Unreal Engine 5 and Maya.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Timur Sibatov · Technical Artist">
+<meta property="og:description" content="Worldbuilding tools, real-time water and weather, performance measurement and asset pipelines.">
+<meta property="og:image" content="https://tsibatov.github.io/assets/img/og.jpg">
+<meta property="og:url" content="https://tsibatov.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1415'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' text-anchor='middle' fill='%234CC3CF'%3ETS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F0; --surface:#FFFFFF; --ink:#142023; --muted:#56636A; --rule:#D3DAD9;
+  --accent:#0B7285; --metric:#A65A17; --track:#E1E7E6; --bar:rgba(238,241,240,.88);
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1415; --surface:#151D1F; --ink:#E4EBEA; --muted:#93A2A5; --rule:#263235;
+  --accent:#4CC3CF; --metric:#F0A35B; --track:#1F2A2C; --bar:rgba(14,20,21,.86); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1415; --surface:#151D1F; --ink:#E4EBEA; --muted:#93A2A5; --rule:#263235;
+  --accent:#4CC3CF; --metric:#F0A35B; --track:#1F2A2C; --bar:rgba(14,20,21,.86); color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:20px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--mono)}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:var(--bar);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--rule)}
+.topbar .wrap{display:flex;align-items:center;gap:20px;height:52px}
+.brand{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:19px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.topbar nav{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;font-family:var(--mono);font-size:12.5px;flex:1;min-width:0;mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.topbar nav::-webkit-scrollbar{display:none}
+.topbar nav a{color:var(--muted);text-decoration:none;white-space:nowrap;padding-block:4px}
+.topbar nav a:hover,.topbar nav a.on{color:var(--accent)}
+.cta{font-family:var(--mono);font-size:12.5px;white-space:nowrap;text-decoration:none;border:1px solid var(--accent);border-radius:4px;padding:5px 10px}
+.cta:hover{background:var(--accent);color:var(--bg)}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:end;padding-block:56px 36px}
+h1{font-size:clamp(46px,8vw,96px);font-weight:800;font-stretch:72%;line-height:.92;letter-spacing:-.01em}
+.role{font-family:var(--display);font-weight:600;font-size:clamp(18px,2.2vw,22px);margin-top:14px;color:var(--accent)}
+.lede{margin-top:16px;max-width:60ch}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 16px;margin:0;font-size:14.5px}
+.facts dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:2px}
+.facts dd{margin:0}
+
+/* reel */
+.reel{margin:0 0 12px;position:relative}
+.reel video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#0b1112}
+.reel figcaption{margin-top:8px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* index of work */
+.work{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-block:40px 56px;border-bottom:1px solid var(--rule)}
+.work a{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink)}
+.work img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px;background:var(--track);transition:transform .25s ease,filter .25s ease}
+.work a:hover img{transform:translateY(-2px);filter:brightness(1.06)}
+.work strong{font-family:var(--display);font-stretch:85%;font-size:19px;line-height:1.15}
+.work span{font-size:14px;color:var(--muted);line-height:1.45}
+.work .ph{aspect-ratio:16/10;border-radius:6px;background:linear-gradient(135deg,#142326,#0B2F36);display:flex;align-items:flex-end;gap:12px;padding:16px;color:#E4EBEA;transition:transform .25s ease}
+.work a:hover .ph{transform:translateY(-2px)}
+.work .ph b{font-family:var(--display);font-stretch:72%;font-weight:800;font-size:64px;line-height:.8;color:#4CC3CF}
+.work .ph span{font-family:var(--mono);font-size:12px;line-height:1.4;color:#93A2A5;text-transform:uppercase;letter-spacing:.06em}
+.work em{font-style:normal;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
+
+/* case */
+.case{padding-block:64px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+.case h2{font-size:clamp(34px,4.8vw,56px);font-weight:800;font-stretch:78%;line-height:1}
+.oneliner{font-size:clamp(18px,2vw,21px);max-width:60ch;color:var(--muted)}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure img,figure video{display:block;width:100%;height:auto;border-radius:6px;background:var(--track)}
+figure img[data-full]{cursor:zoom-in}
+figcaption{font-size:13.5px;color:var(--muted)}
+.media-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.media-2.wide-left{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+.media-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.media-3 img{aspect-ratio:16/10;object-fit:cover}
+.detail{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:start}
+.story{display:flex;flex-direction:column;gap:18px;max-width:68ch}
+.story h3{font-size:14px;font-family:var(--mono);font-weight:500;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.story ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.story .block{display:flex;flex-direction:column;gap:8px}
+.scope{font-size:14.5px;color:var(--muted);border-left:2px solid var(--rule);padding-left:12px}
+.spec{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 16px;margin:0;font-size:14.5px}
+.spec dt{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+.spec dd{margin:0}
+.story .mono{overflow-wrap:anywhere}
+.metric{font-family:var(--mono);color:var(--metric);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* frame budget chart (to scale, 0–50 ms) */
+.budget{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:12px}
+.budget .head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.bars{position:relative;display:flex;flex-direction:column;gap:10px;padding-top:4px}
+.bar{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;font-family:var(--mono);font-size:13px}
+.bar .track{position:relative;height:22px;background:var(--track);border-radius:3px}
+.bar .fill{position:absolute;inset:0 auto 0 0;border-radius:3px}
+.bar .fill.before{background:var(--muted);opacity:.55}
+.bar .fill.after{background:var(--accent)}
+.bar .val{position:absolute;top:50%;transform:translateY(-50%);font-variant-numeric:tabular-nums;white-space:nowrap}
+.budget-line{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--metric)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.legend .b{color:var(--metric)}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:6px;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:13px;color:var(--accent)}
+.steps strong{font-family:var(--display);font-stretch:90%;font-size:18px;line-height:1.2}
+.steps span{font-size:14.5px;color:var(--muted)}
+
+/* shader studies */
+.studies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.study{display:flex;flex-direction:column;gap:12px}
+.study video{aspect-ratio:1/1;object-fit:cover;background:#07122a}
+.study h3{font-size:24px;font-weight:700;font-stretch:85%}
+.study .ref{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.study ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:5px;font-size:15px}
+.legal{font-size:13px;color:var(--muted);max-width:90ch}
+
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tool{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.tool h3{font-size:22px;font-weight:700;font-stretch:85%}
+.tool .tag{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
+.tool p{font-size:15px}
+
+footer{padding-block:40px 64px;display:flex;flex-direction:column;gap:14px;color:var(--muted);font-size:14px}
+footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .credits{font-size:13px;max-width:100ch}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1700px);max-height:94vh}
+dialog.lb::backdrop{background:rgba(5,9,10,.9)}
+dialog.lb img{display:block;max-width:100%;max-height:88vh;border-radius:6px;margin:0 auto}
+dialog.lb p{color:#cfd9d9;font-size:14px;text-align:center;margin-top:10px;font-family:var(--body)}
+dialog.lb button{position:fixed;top:14px;right:16px;font:500 14px var(--mono);color:#fff;background:rgba(255,255,255,.12);border:0;border-radius:4px;padding:6px 10px;cursor:pointer}
+
+@media (max-width:900px){
+  .work{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .studies{grid-template-columns:minmax(0,1fr)}
+  .study video{max-width:420px}
+}
+@media (max-width:820px){
+  .intro,.detail,.media-2,.media-2.wide-left,.tools{grid-template-columns:minmax(0,1fr);gap:24px}
+  .media-3{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .intro{padding-top:40px}
+}
+@media (max-width:560px){
+  .topbar .cta{display:none}
+  .work{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .case{padding-block:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.work img{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Timur Sibatov</a>
+    <nav aria-label="Sections">
+      <a href="#water">Water</a>
+      <a href="#performance">Performance</a>
+      <a href="#weather">Weather</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#bridge">Procedural</a>
+      <a href="#shaders">Shaders</a>
+      <a href="#liquids">Liquids</a>
+      <a href="#tools">Tools</a>
+    </nav>
+    <a class="cta" href="https://www.linkedin.com/in/timmysib/">LinkedIn</a>
+  </div>
+</div>
+
+<main class="wrap" id="top">
+
+<section class="intro">
+  <div>
+    <h1>Timur Sibatov</h1>
+    <p class="role">Senior Technical Artist · worldbuilding tools, performance, pipelines</p>
+    <p class="lede">I work at Wargaming, where I helped ship World of Tanks: HEAT, a live-service game on the studio's own engine. I build the tools, simulations and measurements that let artists make worlds that look right and hold their frame budget, and I document them so the team can work without waiting on me.</p>
+  </div>
+  <dl class="facts">
+    <dt>Shipped</dt><dd>World of Tanks: HEAT, live service since May 2026</dd>
+    <dt>Next</dt><dd>World of Tanks Modern Armor (console)</dd>
+    <dt>Engines</dt><dd>Unreal Engine 5, Wargaming proprietary</dd>
+    <dt>DCC</dt><dd>Maya, Blender</dd>
+    <dt>Code</dt><dd>Python (Maya API, Unreal), C++, HLSL</dd>
+    <dt>Based</dt><dd>Belgrade, Serbia · open to relocation</dd>
+    <dt>Contact</dt><dd><a href="https://www.linkedin.com/in/timmysib/">linkedin.com/in/timmysib</a></dd>
+  </dl>
+</section>
+
+<figure class="reel">
+  <video src="assets/video/hero.mp4" poster="assets/img/poster-hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="Waterfall in a mountain gorge, rendered in Unreal Engine with the Water Dynamics plugin"></video>
+  <figcaption><span>Water Dynamics · gorge showcase, Unreal Engine 5.8</span><a href="#water">Case study ↓</a></figcaption>
+</figure>
+
+<section class="work" aria-label="Selected work">
+  <a href="#water"><img src="assets/img/gorge-landing.jpg" alt="" loading="lazy"><em>Simulation</em><strong>Water Dynamics</strong><span>Rivers and waterfalls that react to what is in them.</span></a>
+  <a href="#performance"><img src="assets/img/prc-panel.jpg" alt="" loading="lazy"><em>Performance</em><strong>Performance Regression Companion</strong><span>Did this content change make the scene slower?</span></a>
+  <a href="#weather"><img src="assets/img/weather-autumn.jpg" alt="" loading="lazy"><em>Worldbuilding</em><strong>Weather Dynamics</strong><span>Snow, rain and leaves that stay on the level.</span></a>
+  <a href="#pipeline"><div class="ph" aria-hidden="true"><b>91</b><span>merged changes<br>2023–2026</span></div><em>Production</em><strong>WoT: HEAT asset pipeline</strong><span>From manual exports to self-serve checks.</span></a>
+  <a href="#bridge"><img src="assets/img/bridge-poster.jpg" alt="" loading="lazy"><em>Procedural · Maya</em><strong>Trestle Bridge</strong><span>Draw a path, get a bridge that fits the terrain.</span></a>
+  <a href="#shaders"><img src="assets/img/cyclo-closeup.jpg" alt="" loading="lazy" style="object-position:50% 35%"><em>HLSL</em><strong>Character material studies</strong><span>Three looks rebuilt from video alone.</span></a>
+  <a href="#liquids"><img src="assets/img/liquid-poster.jpg" alt="" loading="lazy"><em>Shaders · physics</em><strong>Liquid Props</strong><span>Liquid that keeps its volume when tilted.</span></a>
+  <a href="#tools"><img src="assets/img/prc-profile.jpg" alt="" loading="lazy"><em>Editor tools</em><strong>Pipeline tools</strong><span>Audits, batch materials, logic export.</span></a>
+</section>
+
+<!-- WATER -->
+<section class="case" id="water">
+  <p class="eyebrow">Worldbuilding · simulation · Unreal Engine 5.8 plugin</p>
+  <h2>Water Dynamics</h2>
+  <p class="oneliner">Rivers, lakes and waterfalls that respond to what is in them. Rocks change the flow, and the flow moves the surface, the foam and the wet line on the banks.</p>
+  <figure>
+    <video controls preload="none" playsinline poster="assets/img/gorge-stylized-hero.jpg" src="assets/video/gorge.mp4"></video>
+    <figcaption>Gorge showcase, 64 s. 0:00–0:32 realistic look, 0:32–1:04 stylized: wide shot, waterfall landing, rapids, shallows, thrown stone. Recorded at a fixed simulation step, so it is not a frame-rate measurement.</figcaption>
+  </figure>
+  <div class="media-3">
+    <figure><img src="assets/img/gorge-landing.jpg" data-full alt="Waterfall sheets landing in a green pool with foam and mist" loading="lazy"><figcaption>Waterfall landing: aerated sheets, foam and mist where they meet the pool.</figcaption></figure>
+    <figure><img src="assets/img/gorge-rapids.jpg" data-full alt="Rapids with white water breaking around boulders" loading="lazy"><figcaption>Rapids: foam forms behind obstacles and where the current shears.</figcaption></figure>
+    <figure><img src="assets/img/gorge-shallows.jpg" data-full alt="Clear shallow water over gravel with refracted caustics" loading="lazy"><figcaption>Shallows: depth absorption, refraction and caustics on the bed.</figcaption></figure>
+  </div>
+  <div class="media-2">
+    <figure><video src="assets/video/rock.mp4" poster="assets/img/poster-rock.jpg" muted loop playsinline preload="none" data-auto aria-label="A rock appears in a running river and the current re-routes around it"></video><figcaption>Earlier build (0.6): a test rock is switched on in a running river. Flow, foam and surface detail re-route around it. One unedited take.</figcaption></figure>
+    <figure><img src="assets/img/gorge-wetness.jpg" data-full alt="Four frames of a boulder whose wet band follows the water level up and down" loading="lazy"><figcaption>Wet line: the river level is raised 55 cm and lowered again. The wet band on the rock follows the water and dries over time.</figcaption></figure>
+  </div>
+  <figure><img src="assets/img/gorge-before-after.jpg" data-full alt="Left: the original blockout scene. Right: the gorge after the environment pass" loading="lazy"><figcaption>The same water system before and after the environment pass: new composition, scanned scenery and lighting.</figcaption></figure>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>Problem</h3><p>River surfaces are usually driven by a hand-painted flow map. It looks right until someone moves a rock, and then the art and the flow disagree.</p></div>
+      <div class="block"><h3>Approach</h3><ul>
+        <li>A spline defines the channel. A depth-averaged finite-volume shallow-water solver computes the flow (hydrostatic bed reconstruction, CFL substeps, Manning friction).</li>
+        <li>Rock collision is written into the bed height map: exposed rocks split the current, submerged rocks make it shallower.</li>
+        <li>The solved velocity drives ripples, advected foam and buoyancy, so one field feeds every visual layer.</li>
+        <li>Waterfalls are gravity sheets with momentum forcing into the pool. Stone impacts add a wave packet, a splash crown, a rebound jet and droplets.</li>
+        <li>Single Layer Water optics: IOR and Fresnel, depth absorption, refraction and approximate caustics.</li>
+        <li>A wet-line material function follows the local water level, so banks and rocks darken where the water reaches and dry again over time.</li>
+      </ul></div>
+      <div class="block"><h3>For the artist</h3><p>One panel creates a river, lake or waterfall. Width, depth and flow speed are in real units. The artist switches between realistic and stylized looks, picks a waterbed (rocky, sandy, silty, algae), sets turbidity, and saves the result as a look preset for other water bodies.</p></div>
+      <p class="scope">Scope: authoring beta. 2.5D surface flow inside a finite domain, not a 3D FLIP or SPH volume. Profiled in the editor at 1080p and not yet tuned to a shipping budget. Showcase scenery is Quixel Megascans via Fab, used in the demo only and not shipped with the plugin.</p>
+    </div>
+    <dl class="spec">
+      <dt>Built with</dt><dd>C++ runtime and editor modules, HLSL, Single Layer Water materials, Python scene assembly</dd>
+      <dt>Engine</dt><dd>Unreal Engine 5.8.2, DX12 SM6</dd>
+      <dt>Showcase</dt><dd>Gorge level assembled by Python scripts; two looks, five shots each, captured at 1080p30</dd>
+      <dt>Version</dt><dd>0.8 authoring beta</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section class="case" id="performance">
+  <p class="eyebrow">Performance · Unreal Engine 5.8 tool</p>
+  <h2>Performance Regression Companion</h2>
+  <p class="oneliner">A repeatable answer to “did this content change make the scene slower?”</p>
+  <figure>
+    <video controls preload="none" playsinline poster="assets/img/prc-panel.jpg" src="assets/video/prc.mp4"></video>
+    <figcaption>70-second walkthrough: save a test profile, capture a baseline, change the content, capture a candidate, compare.</figcaption>
+  </figure>
+  <div class="budget" role="img" aria-label="Frame time p95: before 47.2 ms, after 15.0 ms, budget 16.7 ms">
+    <div class="head"><span>Frame time p95, dense liquid-props scene, five repeats per version</span><span class="mono">0–50 ms</span></div>
+    <div class="bars">
+      <div class="bar"><span>Before</span><div class="track"><div class="fill before" style="width:94.4%"></div><span class="val" style="left:calc(94.4% - 72px)">47.2 ms</span></div></div>
+      <div class="bar"><span>After</span><div class="track"><div class="fill after" style="width:30%"></div><span class="val" style="left:calc(30% - 70px);color:var(--bg);font-weight:500">15.0 ms</span></div></div>
+      <div aria-hidden="true" style="position:absolute;inset:0 0 0 76px;pointer-events:none"><div class="budget-line" style="left:33.3%"></div></div>
+    </div>
+    <div class="legend"><span class="b">┆ 16.7 ms budget (60 fps)</span><span>−68% frame p95</span></div>
+  </div>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>Problem</h3><p>Content changes are usually judged by watching the frame counter in the editor. Single runs are noisy, editor overhead varies, and two people can measure the same change and disagree.</p></div>
+      <div class="block"><h3>Approach</h3><ul>
+        <li>A saved test profile fixes the map, camera, resolution, quality settings and frame budget.</li>
+        <li>Every repeat launches a separate Unreal process and records Epic's native CSV Profiler data. Unreal Insights traces are optional.</li>
+        <li>Five repeats per content version. The comparison checks engine, hardware, camera and settings before it makes a claim, and differences inside the observed noise stay marked as uncertain.</li>
+        <li>Results export as a portable HTML/JSON report with the raw captures, so a reviewer can check the analysis without Unreal.</li>
+      </ul></div>
+      <div class="block"><h3>Result</h3><p>In a dense scene of liquid props, the captures localized game-thread time spent rebuilding foam meshes. Reducing that geometry detail brought frame p95 from <span class="metric">47.2</span> to <span class="metric">15.0 ms</span> and game-thread p95 from <span class="metric">46.6</span> to <span class="metric">14.9 ms</span>.</p></div>
+    </div>
+    <dl class="spec">
+      <dt>Built with</dt><dd>C++ editor module (Slate UI), Python comparison processor</dd>
+      <dt>Platform</dt><dd>Windows, D3D12, UE 5.8</dd>
+      <dt>Validation</dt><dd>24 automated tests, clean-project install, real baseline / candidate / cancel runs</dd>
+      <dt>Status</dt><dd>v1.0.1, packaged for Fab</dd>
+    </dl>
+  </div>
+  <div class="media-2 wide-left">
+    <figure>
+      <video controls preload="none" playsinline poster="assets/img/prc-lyra-overview.jpg" src="assets/video/prc-lyra.mp4"></video>
+      <figcaption>Lyra Environment Lab: Epic's Lyra Expanse environment rebuilt as three test levels.</figcaption>
+    </figure>
+    <div class="story">
+      <div class="block"><h3>On real content</h3><p>To exercise the workflow on a production-like scene, I rebuilt the Lyra Expanse environment (2,391 placed mesh components, 277 meshes, 21 materials) as three ordinary levels with 0, 12 and 48 added shadow-casting lights.</p><p>The 48-light setup exposed a Virtual Shadow Map packed-light overflow. Raising the per-pixel limit was not enough; the fix was to hold <span class="mono">r.Shadow.Virtual.OnePassProjection=0</span> identical across baseline and candidate, as a correctness choice rather than an optimization.</p></div>
+      <p class="scope">Measurements on this scene are still in progress. No speed-up is claimed for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WEATHER -->
+<section class="case" id="weather">
+  <p class="eyebrow">Worldbuilding · artist-facing tool</p>
+  <h2>Weather Dynamics and Weather Studio</h2>
+  <p class="oneliner">Seasonal weather an artist can add to an existing level from one panel, without breaking its lighting.</p>
+  <figure>
+    <video controls preload="none" playsinline poster="assets/img/weather-cover.jpg" src="assets/video/weather.mp4"></video>
+    <figcaption>88-second presentation: snow, rain and autumn in realistic and stylized looks, cloud fronts and the Weather Studio panel.</figcaption>
+  </figure>
+  <div class="media-3">
+    <figure><img src="assets/img/weather-snow.jpg" data-full alt="Park scene covered in accumulated snow" loading="lazy"><figcaption>Snow with visible depth on every surface it reaches.</figcaption></figure>
+    <figure><img src="assets/img/weather-autumn.jpg" data-full alt="Park scene with falling leaves collecting on paving" loading="lazy"><figcaption>Autumn leaves that settle and persist.</figcaption></figure>
+    <figure><img src="assets/img/weather-pair.jpg" data-full alt="The same autumn scene in realistic and stylized looks side by side" loading="lazy"><figcaption>Same weather, two visual treatments.</figcaption></figure>
+  </div>
+  <div class="media-2">
+    <figure><img src="assets/img/weather-studio.jpg" data-full alt="Weather Studio editor panel with setup modes, live preview and cloud look controls" loading="lazy"><figcaption>Weather Studio: presets, live preview, and setup that keeps the level's lighting and exposure.</figcaption></figure>
+    <figure><video src="assets/video/clouds.mp4" poster="assets/img/poster-clouds.jpg" muted loop playsinline preload="none" data-auto aria-label="Volumetric clouds drifting with the wind"></video><figcaption>Cloud looks driven by the weather state, drifting with the wind.</figcaption></figure>
+  </div>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>Problem</h3><p>Weather systems are often owned by an engineer, and adding one to a lit level tends to replace its sky and exposure. Artists need presets, a live preview and safe defaults.</p></div>
+      <div class="block"><h3>Approach</h3><ul>
+        <li>One editor panel with three setup modes: weather only, clouds only, or both. Existing lighting is preserved; adding missing lighting is an explicit action.</li>
+        <li>12 weather presets and 8 cloud looks stored as reusable data assets, with four quality tiers.</li>
+        <li>Rain, snow and autumn leaves accumulate on surfaces through finite heightfield patches, with a material function for receiver wetness.</li>
+        <li>Deep snow: a Character component leaves body troughs, footprints and raised banks that persist and refill under snowfall.</li>
+      </ul></div>
+      <p class="scope">Scope: finite static patches. No automatic Landscape binding, open-world coverage or network replication yet.</p>
+    </div>
+    <dl class="spec">
+      <dt>Built with</dt><dd>C++ runtime and editor modules, materials, Blueprint API</dd>
+      <dt>Validation</dt><dd>Editor, Development and Shipping builds; clean consumer project; packaged maps launched; 12 automation tests</dd>
+      <dt>Version</dt><dd>1.2.0, UE 5.8</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="case" id="pipeline">
+  <p class="eyebrow">Production · live service</p>
+  <h2>Asset pipeline for World of Tanks: HEAT</h2>
+  <p class="oneliner">From exporting assets by hand to checks that let artists take their work to the build on their own.</p>
+  <p class="lede" style="max-width:66ch">When I joined in 2023, I exported vehicles by hand and every asset waited for me. Over three years and 91 merged changes I replaced that role with tools, and moved myself to review.</p>
+  <ol class="steps">
+    <li><strong>Wrap the manual step</strong><span>A control with a correct default.</span></li>
+    <li><strong>Validate where it is made</strong><span>In the DCC, before the build, where errors are cheap.</span></li>
+    <li><strong>Report, never hide</strong><span>An error the artist can act on alone.</span></li>
+    <li><strong>Document and step back</strong><span>One page, read once. Then I review.</span></li>
+  </ol>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>What I built</h3><ul>
+        <li>Character import and validation pipeline in Maya (Python, OpenMaya).</li>
+        <li>Validators for AO and texture formats, vehicle materials, character textures and VFX, plus character asset cleanup.</li>
+        <li>A review world that lays out a whole asset set from one panel.</li>
+        <li>Import rules moved from code into project settings, so they change without a code change.</li>
+        <li>Documentation and onboarding for artists and animators.</li>
+      </ul></div>
+      <p class="scope">Production work is under NDA, so this case has no screenshots. Details in conversation.</p>
+    </div>
+    <dl class="spec">
+      <dt>Game</dt><dd>World of Tanks: HEAT, live service since May 2026</dd>
+      <dt>Engine</dt><dd>Wargaming proprietary</dd>
+      <dt>Role</dt><dd>Senior Technical Artist</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="case" id="bridge">
+  <p class="eyebrow">Worldbuilding · procedural · Maya to Unreal</p>
+  <h2>Trestle Bridge</h2>
+  <p class="oneliner">Draw a path across a ravine, and the structure fits the terrain.</p>
+  <figure>
+    <video controls preload="none" playsinline poster="assets/img/bridge-poster.jpg" src="assets/video/bridge.mp4"></video>
+    <figcaption>40-second walkthrough: the Maya tool on the left, the finished asset in Unreal at the end.</figcaption>
+  </figure>
+  <figure><img src="assets/img/bridge-timber.jpg" data-full alt="Before and after comparison of the timber deck with per-board variation" loading="lazy"><figcaption>Timber revision: neighbouring boards sample different parts of the texture, with per-member tone, scale and roughness variation from one material.</figcaption></figure>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>Approach</h3><ul>
+        <li>A NURBS curve and a terrain mesh are the only inputs. Sliders set deck width, support spacing, tier height and path coverage; editing the curve rebuilds the structure and updates terrain contacts.</li>
+        <li>Bents are placed along the path and their legs find the ground with raycasts. When a raycast misses, the tool reports the location instead of hiding the gap, so the artist fixes the layout rather than the geometry.</li>
+        <li>Output is eight organized mesh batches (decking, stringers, frames, bracing, hardware), with custom component meshes and seeded presets.</li>
+        <li>Each member carries a vertex-colour payload as shader data, which gives the reference deck 158 distinct board variations without a material per board. Verified by reading the Unreal import back into Maya.</li>
+      </ul></div>
+      <p class="scope">The live generator runs in Maya; Unreal receives baked static meshes. The video is an edited capture, not a real-time performance test.</p>
+    </div>
+    <dl class="spec">
+      <dt>Built with</dt><dd>Maya 2026, Python API 2.0, PySide6</dd>
+      <dt>Engine side</dt><dd>UE 5.8, FBX, Sequencer, Movie Render Queue</dd>
+      <dt>Checks</dt><dd>Geometry and construction suite, Maya DG checks, 24 component meshes validated in Unreal</dd>
+      <dt>Textures</dt><dd>Poly Haven, CC0; end grain and steel are procedural</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- SHADERS -->
+<section class="case" id="shaders">
+  <p class="eyebrow">Shaders · HLSL · Unreal Engine 5.8</p>
+  <h2>Character material studies</h2>
+  <p class="oneliner">Three Fortnite outfit looks rebuilt as materials from public video previews alone. No extracted assets and no textures: the effects are HLSL inside Custom nodes, and each project regenerates its materials from a Python script.</p>
+  <div class="studies">
+    <article class="study">
+      <video src="assets/video/grimey.mp4" poster="assets/img/poster-grimey.jpg" muted loop playsinline preload="none" data-auto aria-label="Mannequin turntable with glowing ink symbols on the body"></video>
+      <p class="ref">Reference: Grimey</p>
+      <h3>Ink Souls</h3>
+      <ul>
+        <li>12 procedural symbols and a persistent face, drawn mathematically on Epic's Manny.</li>
+        <li>The inner pattern turns toward the camera, so it reads as depth inside the body rather than a decal.</li>
+        <li>One opaque Default Lit material. Height, mapping yaw and offset parameters port it to other skeletal meshes.</li>
+      </ul>
+      <figure><img src="assets/img/grimey-compare.jpg" data-full alt="Three mannequins with zero, six and twelve active symbols" loading="lazy"><figcaption>0, 6 and 12 active symbols.</figcaption></figure>
+    </article>
+    <article class="study">
+      <video src="assets/video/cyclo-storm.mp4" poster="assets/img/poster-cyclo-storm.jpg" muted loop playsinline preload="none" data-auto aria-label="Close-up of a glass helmet filled with swirling purple storm clouds"></video>
+      <p class="ref">Reference: Cyclo</p>
+      <h3>Storm Helmet</h3>
+      <ul>
+        <li>The helmet surface integrates swirling clouds and a glowing core inside an ellipsoid volume (8–40 steps, 24 by default).</li>
+        <li>Arms carry moving volumetric noise with thin pulsing discharges; a separate glass dome adds Fresnel and highlight.</li>
+        <li>Built on my own procedural armored mannequin.</li>
+      </ul>
+      <figure><img src="assets/img/cyclo-compare.jpg" data-full alt="Three views: full effect, internal clouds and core, and the same time with the core disabled" loading="lazy"><figcaption>Full effect, clouds and core, core disabled at the same time value.</figcaption></figure>
+    </article>
+    <article class="study">
+      <video src="assets/video/balvin.mp4" poster="assets/img/poster-balvin.jpg" muted loop playsinline preload="none" data-auto aria-label="Turntable of an iridescent skeleton figure with a spectral shell and crown"></video>
+      <p class="ref">Reference: Skeleton Balvin</p>
+      <h3>Spectral Skeleton</h3>
+      <ul>
+        <li>Iridescent bones whose hue shifts at grazing angles, under a translucent shell with a rim boost.</li>
+        <li>Four master materials: bones, shell, glossy rainbow clothing and a floating crown.</li>
+        <li>A control instance disables the iridescence to show what it contributes.</li>
+      </ul>
+      <figure><img src="assets/img/balvin-compare.jpg" data-full alt="Three views: full effect, without shell, without shell and with fixed hue" loading="lazy"><figcaption>Full effect, without shell, without shell and fixed hue.</figcaption></figure>
+    </article>
+  </div>
+  <p class="legal">Fan studies made from publicly available video previews. Portions of the materials used are trademarks and/or copyrighted works of Epic Games, Inc. All rights reserved by Epic. This material is not official and is not endorsed by Epic. Manny is Unreal Engine sample content.</p>
+</section>
+
+<!-- LIQUIDS -->
+<section class="case" id="liquids">
+  <p class="eyebrow">Shaders · physics · Unreal Engine 5.8 plugin</p>
+  <h2>Liquid Props</h2>
+  <p class="oneliner">Liquid in bottles and glasses that keeps its volume when tilted and reacts to motion and impacts.</p>
+  <figure>
+    <video controls preload="none" playsinline poster="assets/img/poster-liquid.jpg" src="assets/video/liquid.mp4"></video>
+    <figcaption>38-second showcase, captured from the Unreal runtime. The on-screen sliders are live controls.</figcaption>
+  </figure>
+  <div class="detail">
+    <div class="story">
+      <div class="block"><h3>Approach</h3><ul>
+        <li>A gravity-aligned free surface whose height is solved so the liquid keeps its volume under tilt. Per-frame telemetry records the surface normal and volume error.</li>
+        <li>Sloshing responds to translation and impulses, with artist-facing damping and viscosity.</li>
+        <li>Four recipes (wine, still water, cola, sparkling water) and four container shapes: carbonation bubbles, a foam head that forms with motion and decays, condensation and wall film.</li>
+        <li>Everything is a property on the actor: fill, tint, opacity, damping, viscosity, bubbles and foam. Artists never touch C++.</li>
+      </ul></div>
+      <div class="block"><h3>Connection</h3><p>The <a href="#performance">performance case</a> came from this project: the Companion localized the foam-mesh rebuild that dominated the game thread in a dense scene of these props.</p></div>
+      <p class="scope">Scope: a planar sloshing surface with approximate absorption and artistic viscosity, not a general fluid solver. The video uses a fixed simulation step and is not a frame-rate claim.</p>
+    </div>
+    <dl class="spec">
+      <dt>Built with</dt><dd>C++ actor, HLSL materials, Blueprint-exposed parameters</dd>
+      <dt>Engine</dt><dd>Unreal Engine 5.8.2, DX12 SM6</dd>
+      <dt>Artist kit</dt><dd>4 recipes, 4 container shapes, interactive lab level</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="case" id="tools">
+  <p class="eyebrow">Editor tools · Unreal Engine 5.8</p>
+  <h2>Pipeline tools</h2>
+  <p class="oneliner">Smaller tools for the same goal: problems found where content is made, with a report the artist can act on alone.</p>
+  <div class="tools">
+    <article class="tool"><p class="tag">Available on Fab · v1.1</p><h3>Blueprint Logic Scanner</h3><p>Exports Blueprints, materials, data tables, curve tables, enums and structs to JSON, Markdown and a compact text summary, with a cross-reference pass between them. Used for reviews, documentation and AI-assisted debugging; nothing is sent anywhere automatically. A headless commandlet runs batch scans.</p></article>
+    <article class="tool"><p class="tag">v1.1</p><h3>Project Audit</h3><p>Collects budget and naming violations in one list: texture size and memory, power-of-two, vertex and triangle limits, asset prefixes. Profiles are shareable files, the scan never modifies assets, and every row opens the offending asset. Exports a PASS/FAIL report.</p></article>
+    <article class="tool"><p class="tag">v0.1 beta</p><h3>Material Batch Studio</h3><p>Creates or updates material instances from imported texture sets in one pass. Every change and error is previewed per set before anything is written; skip and update policies protect existing work.</p></article>
+    <article class="tool"><p class="tag">v0.3</p><h3>SurfaceFusion</h3><p>One master material for rock, ground and concrete. Texture scale, moss, dirt, wetness, snow and ground contact are instance parameters, with 10 presets and 10 material functions. Plugs into Weather Dynamics so surfaces react to the current weather.</p></article>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <span>Timur Sibatov · Senior Technical Artist · Belgrade</span>
+    <span>Source code and longer breakdowns on request · <a href="https://www.linkedin.com/in/timmysib/">LinkedIn</a></span>
+  </div>
+  <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment and Manny mannequin. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
+</footer>
+</main>
+
+<dialog class="lb" id="lb" aria-label="Image viewer">
+  <button type="button" id="lb-close">Close ✕</button>
+  <img alt="">
+  <p></p>
+</dialog>
+
+<script>
+(function(){
+  // Lightbox for gallery images
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbCap=lb.querySelector('p');
+  document.querySelectorAll('img[data-full]').forEach(function(img){
+    img.addEventListener('click',function(){
+      lbImg.src=img.currentSrc||img.src; lbImg.alt=img.alt;
+      var cap=img.closest('figure'); cap=cap&&cap.querySelector('figcaption');
+      lbCap.textContent=cap?cap.textContent:'';
+      if(lb.showModal) lb.showModal();
+    });
+  });
+  lb.addEventListener('click',function(e){ if(e.target!==lbImg) lb.close(); });
+
+  // Muted loops play only while visible
+  var loops=document.querySelectorAll('video[data-auto]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var v=en.target;
+        if(en.isIntersecting){ if(v.preload==='none'){v.preload='auto';} var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+        else v.pause();
+      });
+    },{threshold:.35});
+    loops.forEach(function(v){io.observe(v);});
+  } else { loops.forEach(function(v){v.autoplay=true;}); }
+
+  // Pause the reel when scrolled away
+  var reel=document.querySelector('.reel video');
+  if(reel && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ var p; if(e[0].isIntersecting){p=reel.play(); if(p&&p.catch)p.catch(function(){});} else reel.pause(); },{threshold:.2}).observe(reel);
+  }
+
+  // Highlight the current section in the top bar
+  var links=[].slice.call(document.querySelectorAll('.topbar nav a'));
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href')==='#'+en.target.id); });
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('section.case').forEach(function(s){spy.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
