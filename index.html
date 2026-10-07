@@ -271,6 +271,23 @@ dialog.lb img{max-width:100%;max-height:86vh;border-radius:10px;margin:0 auto}
 dialog.lb p{color:#cfd9d9;font-size:14px;text-align:center;margin-top:12px}
 dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 14px;cursor:pointer}
 
+/* season slider */
+.seasons{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--rule);background:#000;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.seasons img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.seasons img+img{position:absolute;inset:0;height:100%;opacity:0}
+.seasons .now-s{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:rgba(5,7,8,.65);border:1px solid var(--rule-2);border-radius:999px;padding:5px 10px;pointer-events:none}
+.seasons input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.season-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.season-tabs button{font:500 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:10px 0;cursor:pointer;transition:color .3s,background .3s,border-color .3s}
+.season-tabs button:hover{color:var(--ink);border-color:var(--rule-2)}
+.season-tabs button.on{color:#031013;background:var(--accent);border-color:var(--accent)}
+.stats.in-case{margin-top:16px}
+.row2 .stats.stats3{grid-template-columns:minmax(0,1fr);margin:0;height:100%}
+.row2 .stats.stats3 .stat{justify-content:center}
+@media (min-width:1001px){.steps.flow{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:821px) and (max-width:1000px){.steps.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.steps.flow strong{font-size:19px}
+
 @media (max-width:1000px){
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(220px,46vw,340px)}
   .card,.card.c2t{grid-column:span 1;grid-row:span 1}
@@ -354,7 +371,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   <div class="wrap">
     <p class="statement" data-reveal>I build the <em>tools</em>, <em>simulations</em> and <em>measurements</em> that let artists ship worlds <span class="dim">— and I document them so the team can work without waiting on me.</span></p>
     <div class="stats" data-reveal>
-      <div class="stat"><b data-count="91">91</b><span>merged pipeline changes on World of Tanks: HEAT since 2023</span></div>
+      <div class="stat"><b data-count="15" data-suffix="/15">15<small>/15</small></b><span>character assets in World of Tanks: HEAT built through the pipeline I designed</span></div>
       <div class="stat"><b data-count="68" data-prefix="−" data-suffix="%">−68<small>%</small></b><span>frame p95 after a regression my profiling tool localized</span></div>
       <div class="stat"><b data-count="8">8</b><span>Unreal Engine 5.8 tools and plugins built end to end</span></div>
       <div class="stat"><b data-count="1">1</b><span>live-service game shipped: World of Tanks: HEAT, May 2026</span></div>
@@ -380,8 +397,8 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
     <div class="bento">
       <a class="card c4" href="#water" data-reveal><img src="assets/img/gorge-landing.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-water.mp4" muted loop playsinline preload="none"></video><span class="num">01</span><span class="tag">Simulation</span><span class="meta"><strong>Water Dynamics</strong><span>Rivers, lakes and waterfalls that react to what is in them.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card c2t" href="#performance" data-reveal><img src="assets/img/prc-panel.jpg" alt="" loading="lazy" style="object-position:30% 50%"><video data-preview src="assets/video/p-prc.mp4" muted loop playsinline preload="none"></video><span class="num">02</span><span class="tag">Performance</span><span class="meta"><strong>Performance Regression Companion</strong><span>Did this content change make the scene slower?</span></span><span class="go" aria-hidden="true">→</span></a>
-      <a class="card" href="#weather" data-reveal><img src="assets/img/card-weather.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-weather.mp4" muted loop playsinline preload="none"></video><span class="num">03</span><span class="tag">Worldbuilding</span><span class="meta"><strong>Weather Dynamics</strong><span>Snow, rain and leaves that stay on the level.</span></span><span class="go" aria-hidden="true">→</span></a>
-      <a class="card type" href="#pipeline" data-reveal><span class="big" aria-hidden="true">91</span><span class="num">04</span><span class="tag">Production</span><span class="meta"><strong>WoT: HEAT asset pipeline</strong><span>91 merged changes: from manual exports to self-serve checks.</span></span><span class="go" aria-hidden="true">→</span></a>
+      <a class="card" href="#weather" data-reveal><img src="assets/img/card-weather.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-weather.mp4" muted loop playsinline preload="none"></video><span class="num">03</span><span class="tag">Worldbuilding</span><span class="meta"><strong>Weather Dynamics</strong><span>Four seasons on one camera, with real accumulation.</span></span><span class="go" aria-hidden="true">→</span></a>
+      <a class="card type" href="#pipeline" data-reveal><span class="big" aria-hidden="true">15</span><span class="num">04</span><span class="tag">Production</span><span class="meta"><strong>WoT: HEAT character pipeline</strong><span>Designed from scratch. Every character asset in the game goes through it.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#bridge" data-reveal><img src="assets/img/card-bridge.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-bridge.mp4" muted loop playsinline preload="none"></video><span class="num">05</span><span class="tag">Procedural · Maya</span><span class="meta"><strong>Trestle Bridge</strong><span>Draw a path, get a bridge that fits the terrain.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#shaders" data-reveal><img src="assets/img/card-chars.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-chars.mp4" muted loop playsinline preload="none"></video><span class="num">06</span><span class="tag">Shaders</span><span class="meta"><strong>Fortnite character materials</strong><span>Effects rebuilt on the original game models.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#liquids" data-reveal><img src="assets/img/card-liquid.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-liquid.mp4" muted loop playsinline preload="none"></video><span class="num">07</span><span class="tag">Shaders · physics</span><span class="meta"><strong>Liquid Props</strong><span>Liquid that keeps its volume when tilted.</span></span><span class="go" aria-hidden="true">→</span></a>
@@ -506,23 +523,39 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
     <div>
       <p class="eyebrow">Worldbuilding · artist-facing tool</p>
       <h2>Weather Dynamics</h2>
-      <p class="oneliner">Seasonal weather an artist can add to an existing level from one panel, without breaking its lighting.</p>
-      <ul class="tags"><li>C++</li><li>Materials</li><li>Volumetric clouds</li><li>Editor UI</li></ul>
+      <p class="oneliner">Four seasons on one camera, switched live in the level. Snow, rain and leaves build up on real geometry, and the light changes with them.</p>
+      <ul class="tags"><li>C++</li><li>Materials</li><li>Particles</li><li>Volumetric clouds</li><li>Editor UI</li></ul>
     </div>
   </div>
   <div class="wide media">
     <figure data-reveal>
-      <div class="frame"><video controls preload="none" playsinline poster="assets/img/weather-cover.jpg" src="assets/video/weather.mp4"></video></div>
-      <figcaption>88-second presentation: snow, rain and autumn in realistic and stylized looks, cloud fronts and the Weather Studio panel.</figcaption>
+      <div class="frame"><video src="assets/video/wx-seasons.mp4" poster="assets/img/wx-seasons-poster.jpg" muted loop playsinline controls preload="none" data-auto aria-label="One camera: clear, rain, autumn and snow, changing inside the scene"></video></div>
+      <figcaption>One take, 12 seconds. Sun, fog, clouds, exposure, wetness, snow and foliage all change inside the scene: no cuts, no crossfades.</figcaption>
+    </figure>
+    <figure data-reveal>
+      <div class="seasons">
+        <img src="assets/img/wx-clear.jpg" alt="Village square in clear weather" loading="lazy">
+        <img src="assets/img/wx-rain.jpg" alt="The same view in rain" loading="lazy">
+        <img src="assets/img/wx-autumn.jpg" alt="The same view in autumn, backlit by a low sun" loading="lazy">
+        <img src="assets/img/wx-snow.jpg" alt="The same view covered in snow" loading="lazy">
+        <span class="now-s" aria-hidden="true">Clear</span>
+        <input type="range" min="0" max="300" value="0" step="1" aria-label="Season: drag to change the weather">
+      </div>
+      <div class="season-tabs" role="group" aria-label="Choose a season"><button type="button">Clear</button><button type="button">Rain</button><button type="button">Autumn</button><button type="button">Snow</button></div>
+      <figcaption>Same camera, four native captures, no retouching. Drag across the image to change the weather.</figcaption>
     </figure>
     <div class="row3" data-reveal>
-      <figure><div class="frame"><img src="assets/img/weather-snow.jpg" data-full alt="Park scene covered in accumulated snow" loading="lazy"></div><figcaption>Snow with visible depth on every surface it reaches.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/weather-autumn.jpg" data-full alt="Park scene with falling leaves collecting on paving" loading="lazy"></div><figcaption>Autumn leaves that settle and persist.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/weather-pair.jpg" data-full alt="The same autumn scene in realistic and stylized looks side by side" loading="lazy"></div><figcaption>Same weather, two visual treatments.</figcaption></figure>
+      <figure><div class="frame"><video src="assets/video/wx-snow-b.mp4" poster="assets/img/wx-snow-b-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="Snow building up on a thatched roof"></video></div><figcaption>Snow builds up on the thatch: accumulation on real geometry, time-lapsed.</figcaption></figure>
+      <figure><div class="frame"><video src="assets/video/wx-autumn-e.mp4" poster="assets/img/wx-autumn-e-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="Leaves falling in backlight"></video></div><figcaption>Leaves fall from each hornbeam's own crown and settle on the ground.</figcaption></figure>
+      <figure><div class="frame"><video src="assets/video/wx-rain-e.mp4" poster="assets/img/wx-rain-e-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="Rain at ground level"></video></div><figcaption>Rain at ground level: wet stone, puddles from a concavity mask, ripples.</figcaption></figure>
     </div>
     <div class="row2" data-reveal>
-      <figure><div class="frame"><img src="assets/img/weather-studio.jpg" data-full alt="Weather Studio editor panel with setup modes, live preview and cloud look controls" loading="lazy"></div><figcaption>Weather Studio: presets, live preview, and setup that keeps the level's lighting and exposure.</figcaption></figure>
-      <figure><div class="frame"><video src="assets/video/clouds.mp4" poster="assets/img/poster-clouds.jpg" muted loop playsinline preload="none" data-auto aria-label="Volumetric clouds drifting with the wind"></video></div><figcaption>Cloud looks driven by the weather state, drifting with the wind.</figcaption></figure>
+      <figure><div class="frame"><video src="assets/video/wx-studio.mp4" poster="assets/img/wx-studio-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="Weather Studio: from an empty level to accumulated snow"></video></div><figcaption>Weather Studio, real editor capture: empty level, preset, live preview, snow on the floor.</figcaption></figure>
+      <div class="stats stats3">
+        <div class="stat"><b>≤0.8<small>ms</small></b><span>GPU cost of any season over the clear scene, 1080p Epic</span></div>
+        <div class="stat"><b>−1.7<small>ms</small></b><span>GPU time with the game-quality profile in clear and rain</span></div>
+        <div class="stat"><b data-count="40">40</b><span>profiling runs: five per season, before and after optimization</span></div>
+      </div>
     </div>
   </div>
   <div class="wrap detail">
@@ -534,11 +567,19 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
         <li>Rain, snow and autumn leaves accumulate on surfaces through finite heightfield patches, with a material function for receiver wetness.</li>
         <li>Deep snow: a Character component leaves body troughs, footprints and raised banks that persist and refill under snowfall.</li>
       </ul></div>
-      <p class="scope">Scope: finite static patches. No automatic Landscape binding, open-world coverage or network replication yet.</p>
+      <div class="block"><h3>Showcase at production quality</h3><ul>
+        <li>Integrated into an existing lit level without touching its source map. Per-season presets own the sun, fog, clouds and exposure, and the level's own time-of-day logic is held off, so one system drives the light.</li>
+        <li>Added hornbeams as broad-leaf sources, kept the conifers dropping needles, and built puddles from a concavity mask of the accumulation field.</li>
+        <li>Accepted every still by histogram before capture: no crushed blacks, a minimum contrast range, and a blue sky for Clear.</li>
+        <li>Isolated a snow-bridging artifact between neighbouring objects, capped the surface step for the showcase and specified the algorithm fix for the plugin.</li>
+      </ul></div>
+      <div class="block"><h3>Measured</h3><p>Performance Regression Companion, five runs per configuration, 40 in total, at 1080p Epic on an RTX 5070 Ti Laptop GPU. Rain and snow cost no more GPU time than the clear scene, and autumn leaves at most 0.8 ms. A game-quality profile cut 1.7 ms of GPU time in clear and rain, beyond run-to-run noise.</p></div>
+      <p class="scope">Scope: finite static patches. No automatic Landscape binding, open-world coverage or network replication yet. Demo scene: Epic's Medieval Village Megascans sample; trees: Quixel's European Hornbeam. Neither ships with the plugin.</p>
     </div>
     <dl class="spec" data-reveal>
       <dt>Built with</dt><dd>C++ runtime and editor modules, materials, Blueprint API</dd>
       <dt>Validation</dt><dd>Editor, Development and Shipping builds; clean consumer project; packaged maps launched; 12 automation tests</dd>
+      <dt>Measured on</dt><dd>UE 5.8.2, RTX 5070 Ti Laptop GPU, 1920×1080, Epic</dd>
       <dt>Version</dt><dd>1.2.0, UE 5.8</dd>
     </dl>
   </div>
@@ -549,35 +590,50 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   <div class="wrap case-head" data-reveal>
     <span class="case-num">04</span>
     <div>
-      <p class="eyebrow">Production · live service</p>
-      <h2>Asset pipeline for World of Tanks: HEAT</h2>
-      <p class="oneliner">When I joined in 2023, I exported vehicles by hand and every asset waited for me. Over three years and 91 merged changes I replaced that role with tools, and moved myself to review.</p>
-      <ul class="tags"><li>Maya</li><li>Python / OpenMaya</li><li>Validation</li><li>Documentation</li></ul>
+      <p class="eyebrow">Production · World of Tanks: HEAT</p>
+      <h2>Character pipeline</h2>
+      <p class="oneliner">I designed the game's character pipeline from scratch: the asset standard, the import tools, the validation and the handbook. All 15 character assets in the project are built through it.</p>
+      <ul class="tags"><li>C++</li><li>Maya</li><li>Python / OpenMaya</li><li>Validation</li><li>Documentation</li></ul>
     </div>
   </div>
   <div class="wrap">
-    <ol class="steps" data-reveal>
-      <li><strong>Wrap the manual step</strong><span>A control with a correct default.</span></li>
-      <li><strong>Validate where it is made</strong><span>In the DCC, before the build, where errors are cheap.</span></li>
-      <li><strong>Report, never hide</strong><span>An error the artist can act on alone.</span></li>
-      <li><strong>Document and step back</strong><span>One page, read once. Then I review.</span></li>
+    <ol class="steps flow" data-reveal>
+      <li><strong>Maya scene</strong><span>Naming, UV, history and skinning checks in the DCC, with select-and-fix.</span></li>
+      <li><strong>Art import</strong><span>The Character Generator turns one FBX into meshes, derived materials, slots and every prefab variant.</span></li>
+      <li><strong>Animator reimport</strong><span>Skeleton and skinning land on the same asset. Nothing generated is lost.</span></li>
+      <li><strong>One animation graph</strong><span>Lobby and post-battle share one graph per hero and a common parameter contract.</span></li>
+      <li><strong>Validate and review</strong><span>Engine rules, an Asset Zoo review world, and review by a programmer, a technical artist and QA.</span></li>
     </ol>
+    <div class="stats in-case" data-reveal>
+      <div class="stat"><b data-count="15" data-suffix="/15">15<small>/15</small></b><span>character assets in the game built through the generator</span></div>
+      <div class="stat"><b>48→26</b><span>character animation graph files after unification</span></div>
+      <div class="stat"><b data-count="18">18</b><span>vehicle platforms taken through export, LODs, collision and materials</span></div>
+      <div class="stat"><b data-count="93">93</b><span>merged pull requests, and reviewer on 35 from others</span></div>
+    </div>
   </div>
   <div class="wrap detail">
     <div class="story" data-reveal>
-      <div class="block"><h3>What I built</h3><ul>
-        <li>Character import and validation pipeline in Maya (Python, OpenMaya).</li>
-        <li>Validators for AO and texture formats, vehicle materials, character textures and VFX, plus character asset cleanup.</li>
-        <li>A review world that lays out a whole asset set from one panel.</li>
-        <li>Import rules moved from code into project settings, so they change without a code change.</li>
-        <li>Documentation and onboarding for artists and animators.</li>
+      <div class="block"><h3>Problem</h3><p>Character content had grown without a shared standard. Folders, materials and prefab variants differed from hero to hero, lobby and post-battle used separate animation graphs, and setup was manual. Template paths and material rules were hard-coded in C++, so changing the setup meant engineering time.</p></div>
+      <div class="block"><h3>Character pipeline</h3><ul>
+        <li><strong>Asset standard.</strong> Base materials with inheritance rules, prefab templates for every supported game context, five customization slots, one folder structure and naming convention for heroes and skins.</li>
+        <li><strong>Character Generator.</strong> Built on the engine's FBX importer; pre-import checks reject unsupported hierarchies. The second version moved templates, prefab variants and material rules from C++ into project settings, so artists change the setup themselves.</li>
+        <li><strong>Unified Animation Graph.</strong> One lobby and post-battle graph per hero or 3D style; the post-battle scene picks left, center and right poses through events.</li>
+        <li><strong>Validation.</strong> Engine rules for character texture compression, cloth shader settings and materials reused across heroes.</li>
+        <li><strong>Handbook.</strong> Eleven pages for artists, animators and QA, with checklists and a definition of done for each import phase.</li>
+        <li><strong>Asset Zoo</strong>, with a teammate. A review world built on demand: heroes in selected styles, vehicles grouped by nation.</li>
       </ul></div>
-      <p class="scope">Production tools are internal, so this case has no screenshots. Details in conversation.</p>
+      <div class="block"><h3>Maya tools, vehicles and VFX</h3><ul>
+        <li>Slider-based skinning tool, a batch Material Modifier in Python and C#, and validator checks for naming, UVs, history, duplicate polygons and vehicle orientation.</li>
+        <li>Fixed a Maya freeze in the character exporter by replacing a per-curve graph walk with a single upstream pass.</li>
+        <li>Vehicle validation rules for AO, compression, tiling and shading. Exhaust and damaged-track effects moved to multi-shape particle spawning: 4 → 2 emitters on a dual exhaust.</li>
+      </ul></div>
+      <p class="scope">Production tools are internal, so this case has no screenshots. The engine importer, vehicle setup, customization framework and particle technology are team systems that I extended. Maya export, rigging and modeling tools and the validator framework are tools by Yuri Ruskevich, my mentor, shown with permission: I used them in production and extended them.</p>
     </div>
     <dl class="spec" data-reveal>
       <dt>Game</dt><dd>World of Tanks: HEAT, live service since May 2026</dd>
       <dt>Engine</dt><dd>Wargaming proprietary</dd>
       <dt>Role</dt><dd>Senior Technical Artist</dd>
+      <dt>Content</dt><dd>11 heroes and 44 skins integrated, including seasonal and console-partner packs</dd>
     </dl>
   </div>
 </section>
@@ -827,7 +883,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <span>Timur Sibatov · Senior Technical Artist · Belgrade</span>
       <span>Source code and longer breakdowns on request · <a href="https://www.linkedin.com/in/timmysib/">LinkedIn</a> · <a href="https://www.artstation.com/timmysib">ArtStation</a></span>
     </div>
-    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
+    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Epic's Medieval Village Megascans sample and Quixel's European Hornbeam (Weather Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
   </div>
 </footer>
 
@@ -905,6 +961,30 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       setTimeout(function(){ requestAnimationFrame(function step(ts){ if(touched) return; if(!t0) t0=ts; var k=Math.min(1,(ts-t0)/dur), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
         r.value=from+(to-from)*e; set(); if(k<1) requestAnimationFrame(step); }); }, 350);
     },{threshold:.6}); hio.observe(ba); });
+
+  // season slider: crossfade between four captures from one camera
+  document.querySelectorAll('.seasons').forEach(function(box){
+    var imgs=[].slice.call(box.querySelectorAll('img')), r=box.querySelector('input'), lab=box.querySelector('.now-s');
+    var tabs=[].slice.call(box.parentElement.querySelectorAll('.season-tabs button')), names=tabs.map(function(b){return b.textContent;});
+    var touched=false, anim=0;
+    function set(v){ v=Math.max(0,Math.min(300,v)); r.value=v;
+      for(var k=1;k<imgs.length;k++){ imgs[k].style.opacity=Math.max(0,Math.min(1,v/100-(k-1))); }
+      var i=Math.round(v/100); lab.textContent=names[i]; tabs.forEach(function(b,j){ b.classList.toggle('on', j===i); }); }
+    function tween(to,dur,done){ cancelAnimationFrame(anim); to=Math.max(0,Math.min(300,to)); var from=+r.value, t0=null;
+      if(reduce){ set(to); if(done) done(); return; }
+      anim=requestAnimationFrame(function step(ts){ if(!t0) t0=ts; var k=Math.min(1,(ts-t0)/dur), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+        set(from+(to-from)*e); if(k<1) anim=requestAnimationFrame(step); else if(done) done(); }); }
+    r.addEventListener('input', function(){ touched=true; cancelAnimationFrame(anim); set(+r.value); });
+    r.addEventListener('keydown', function(e){ var d=e.key==='ArrowRight'||e.key==='ArrowUp'?1:e.key==='ArrowLeft'||e.key==='ArrowDown'?-1:0;
+      if(!d) return; e.preventDefault(); touched=true; tween((Math.round(+r.value/100)+d)*100, 450); });
+    tabs.forEach(function(b,j){ b.addEventListener('click', function(){ touched=true; tween(j*100, 700); }); });
+    set(0);
+    if(reduce || !hasIO) return;
+    var sio=new IntersectionObserver(function(es){ if(!es[0].isIntersecting) return; sio.disconnect();
+      var seq=[100,200,300], i=0;
+      (function next(){ if(touched || i>=seq.length) return; setTimeout(function(){ if(touched) return; tween(seq[i++], 1100, next); }, i?650:400); })();
+    },{threshold:.55}); sio.observe(box);
+  });
 
   // lightbox
   var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbCap=lb.querySelector('p');
