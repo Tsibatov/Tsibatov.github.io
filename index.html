@@ -622,12 +622,12 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <li><strong>Maya scene</strong><span>Naming, UV, history and skinning checks in the DCC, with select-and-fix.</span></li>
       <li><strong>Art import</strong><span>The Character Generator turns one FBX into meshes, derived materials, slots and every prefab variant.</span></li>
       <li><strong>Animator reimport</strong><span>Skeleton and skinning land on the same asset. Nothing generated is lost.</span></li>
-      <li><strong>One animation graph</strong><span>Lobby and post-battle share one graph per hero and a common parameter contract.</span></li>
+      <li><strong>One animation graph</strong><span>One graph per hero instead of four, shared by lobby and post-battle with a common parameter contract.</span></li>
       <li><strong>Validate and review</strong><span>Engine rules, an Asset Zoo review world, and review by a programmer, a technical artist and QA.</span></li>
     </ol>
     <div class="stats in-case" data-reveal>
       <div class="stat"><b data-count="15" data-suffix="/15">15<small>/15</small></b><span>character assets in the game built through the generator</span></div>
-      <div class="stat"><b>48→26</b><span>character animation graph files after unification</span></div>
+      <div class="stat"><b>4→1</b><span>animation graphs per character after unification</span></div>
       <div class="stat"><b data-count="18">18</b><span>vehicle platforms taken through export, LODs, collision and materials</span></div>
       <div class="stat"><b data-count="93">93</b><span>merged pull requests, and reviewer on 35 from others</span></div>
     </div>
@@ -638,7 +638,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <div class="block"><h3>Character pipeline</h3><ul>
         <li><strong>Asset standard.</strong> Base materials with inheritance rules, prefab templates for every supported game context, five customization slots, one folder structure and naming convention for heroes and skins.</li>
         <li><strong>Character Generator.</strong> Built on the engine's FBX importer; pre-import checks reject unsupported hierarchies. The second version moved templates, prefab variants and material rules from C++ into project settings, so artists change the setup themselves.</li>
-        <li><strong>Unified Animation Graph.</strong> One lobby and post-battle graph per hero or 3D style; the post-battle scene picks left, center and right poses through events.</li>
+        <li><strong>Unified Animation Graph.</strong> Four graphs per character became one, shared by the lobby and post-battle; the post-battle scene picks left, center and right poses through events.</li>
         <li><strong>Validation.</strong> Engine rules for character texture compression, cloth shader settings and materials reused across heroes.</li>
         <li><strong>Handbook.</strong> Eleven pages for artists, animators and QA, with checklists and a definition of done for each import phase.</li>
         <li><strong>Asset Zoo</strong>, with a teammate. A review world built on demand: heroes in selected styles, vehicles grouped by nation.</li>
