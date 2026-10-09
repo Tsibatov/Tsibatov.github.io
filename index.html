@@ -304,7 +304,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
 .flow strong{font-family:var(--display);font-stretch:85%;font-size:18.5px;line-height:1.2;color:var(--ink)}
 .flow li span{font-size:14.5px;color:var(--muted);line-height:1.5}
 .card.c6{grid-column:1/-1}
-.card.c6 img,.card.c6 video{object-position:50% 24%}
+.card.c6 img,.card.c6 video{object-position:50% 50%}
 @media (max-width:820px){.flows{grid-template-columns:minmax(0,1fr)}}
 
 @media (max-width:1000px){
@@ -869,19 +869,19 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   <div class="wrap case-head" data-reveal>
     <span class="case-num">09</span>
     <div>
-      <p class="eyebrow">Gameplay programming · Unreal Engine 5 · 2024–2025</p>
+      <p class="eyebrow">Gameplay programming · Unreal Engine 5 · 2024–2025 · presentation edition 2026</p>
       <h2>Death Struggle</h2>
-      <p class="oneliner">A top-down action shooter led by Dmitry Parkin. Art, models and animation came from other artists. The rest of the game was mine: gameplay and systems design, C++ and Blueprints, enemy AI, UI and input.</p>
+      <p class="oneliner">A top-down action shooter, contract work for Dmitry Parkin. In 2024–2025 I built the game around art from other artists: gameplay and systems design, C++ and Blueprints, enemy AI, UI and input. In 2026 I rebuilt its presentation: a new arena, licensed characters on the original systems, combat feedback and one UI style.</p>
       <ul class="tags"><li>C++</li><li>Blueprints</li><li>Gameplay Ability System</li><li>Behavior Trees · EQS</li><li>UMG</li></ul>
     </div>
   </div>
   <div class="wide media">
     <figure data-reveal>
-      <div class="frame"><video src="assets/video/ds-reel.mp4" poster="assets/img/ds-reel-poster.jpg" muted loop playsinline controls preload="none" data-auto aria-label="Death Struggle: enemy roster, combat, upgrade store and options"></video></div>
-      <figcaption>In-game capture of the prototype, 30 seconds: the enemy roster, combat, the upgrade store and the options menu.</figcaption>
+      <div class="frame"><video src="assets/video/ds-reel.mp4" poster="assets/img/ds-reel-poster.jpg" muted loop playsinline controls preload="none" data-auto aria-label="Death Struggle presentation edition: main menu, wave 5 combat, the Bloat's explosion, upgrade store and settings"></video></div>
+      <figcaption>In-game capture of the 2026 presentation edition, 37 seconds: main menu, wave 5, the Bloat's telegraph and explosion, the upgrade store and settings.</figcaption>
     </figure>
     <div class="row2" data-reveal>
-      <figure><div class="frame"><video src="assets/video/ds-combat.mp4" poster="assets/img/ds-combat-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="The player fights skeletons while a Bloat advances"></video></div><figcaption>Combat: ability-driven attacks and projectiles against enemies run by behaviour trees.</figcaption></figure>
+      <figure><div class="frame"><video src="assets/video/ds-combat.mp4" poster="assets/img/ds-combat-poster.jpg" muted loop playsinline preload="none" data-auto aria-label="The hunter fights skeletons, then a Bloat swells and explodes"></video></div><figcaption>Combat: crossbow fire through the original abilities against behaviour-tree enemies. The Bloat's veins glow brighter until it bursts.</figcaption></figure>
       <div class="stats stats3">
         <div class="stat"><b data-count="6">6</b><span>enemy archetypes with their own AI: skeleton, armoured skeleton, kamikaze, Bloat, spider, sniper</span></div>
         <div class="stat"><b data-count="9">9</b><span>perks in the upgrade store, levelled through Curve Tables and kept in local saves</span></div>
@@ -889,9 +889,9 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       </div>
     </div>
     <div class="row3" data-reveal>
-      <figure><div class="frame"><img src="assets/img/ds-roster.jpg" data-full alt="A Bloat, a skeleton and a spider enemy in the courtyard" loading="lazy"></div><figcaption>Enemy roster: supplied models and animations, wired to AI, combat states and animation notifies.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/ds-store.jpg" data-full alt="Upgrade store with nine perks" loading="lazy"></div><figcaption>Upgrade store: nine perks bought with coins; purchases persist between sessions.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/ds-options.jpg" data-full alt="Options menu with key remapping and graphics settings" loading="lazy"></div><figcaption>Options: key remapping next to window and graphics settings.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/ds-roster.jpg" data-full alt="A crossbow skeleton, a spider and a kamikaze ghoul" loading="lazy"></div><figcaption>Enemy roster, 2026: licensed characters retargeted onto the original AI, combat states and animation notifies.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/ds-store.jpg" data-full alt="Upgrade store with nine perks" loading="lazy"></div><figcaption>Upgrade store: nine perks bought with coins; purchases persist between sessions. Restyled in 2026.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/ds-options.jpg" data-full alt="Settings menu with key remapping and graphics options" loading="lazy"></div><figcaption>Settings: key remapping next to window and graphics options, in the 2026 UI style.</figcaption></figure>
     </div>
   </div>
   <div class="wrap">
@@ -919,7 +919,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
         <h3><span>03</span>Quest feedback</h3>
         <ol>
           <li><strong>Quest event</strong><span>Gameplay publishes an event with ID, state, progress, text and presentation data.</span></li>
-          <li><strong>Notification subsystem</strong><span>C++. Maps each event to a toast or a banner message.</span></li>
+          <li><strong>Notification subsystem</strong><span>C++. Turns each event into a notice with priority and presentation data. The HUD subscribes to it.</span></li>
           <li><strong>Rules</strong><span>Priority, duplicate suppression and a bounded history. Messages wait until a cinematic ends.</span></li>
           <li><strong>UMG</strong><span>Widgets present the message through Blueprint events, separate from the rules.</span></li>
         </ol>
@@ -936,13 +936,20 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
         <li><strong>Quests and feedback.</strong> Quest scenarios and the C++ pipeline that turns quest events into on-screen messages.</li>
         <li><strong>Menus, input and flow.</strong> HUD, main and pause menus, store, enemy glossary, graphics options and key remapping. Moved input to Enhanced Input and added gamepad support. Intro flow, collectible ability unlocks, and the first chapter's encounters and quests.</li>
       </ul></div>
-      <p class="scope">Development is paused and the game is unreleased. The courtyard in the captures is a presentation scene built in 2026 to record the preserved prototype.</p>
+      <div class="block"><h3>Presentation edition, 2026</h3><ul>
+        <li><strong>Look.</strong> A moonlit cemetery arena with new lighting and camera. Characters sit on their own lighting channel so they read against the ground.</li>
+        <li><strong>Characters.</strong> Licensed models retargeted onto the original abilities, with montage and notify timings kept. The hero is merged into one skeletal mesh with three LODs. The Bloat swells through bone scaling in a post-process Anim Blueprint, and its veins glow from the state of the real explosion ability.</li>
+        <li><strong>Feel.</strong> Input buffering for dodge and reload, hit-stop and camera shake tuned in a Data Asset, soft aim assist for gamepad only.</li>
+        <li><strong>UI.</strong> HUD, menus, store and settings rebuilt in one style over the live arena, with damage numbers as real widgets.</li>
+        <li><strong>Budget.</strong> The packaged build at 1080p High runs at 74 fps with eight enemies on screen; p95 frame time is 14.9 ms.</li>
+      </ul></div>
+      <p class="scope">Development is paused and the game is unreleased. The captures show the 2026 presentation edition: one arena from the preserved prototype, played through scripted input on the real ability chain, with the hero's health floored for the recording.</p>
     </div>
     <dl class="spec" data-reveal>
       <dt>Role</dt><dd>Gameplay programming and systems design: everything except art, models and animation</dd>
-      <dt>Project lead</dt><dd>Dmitry Parkin</dd>
+      <dt>Credit</dt><dd>Contract work for Dmitry Parkin, 2024–2025. Presentation edition 2026</dd>
       <dt>Engine</dt><dd>Unreal Engine 5, C++ and Blueprints</dd>
-      <dt>Period</dt><dd>2024–2025</dd>
+      <dt>Period</dt><dd>2024–2025; presentation edition 2026</dd>
       <dt>Status</dt><dd>Prototype, development paused</dd>
     </dl>
   </div>
@@ -988,7 +995,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <span>Timur Sibatov · Senior Technical Artist · Belgrade</span>
       <span>Source code and longer breakdowns on request · <a href="https://www.linkedin.com/in/timmysib/">LinkedIn</a> · <a href="https://www.artstation.com/timmysib">ArtStation</a></span>
     </div>
-    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Epic's Medieval Village Megascans sample and Quixel's European Hornbeam (Weather Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Death Struggle: project led by Dmitry Parkin; models, animations and effects by other artists and third-party sources. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
+    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Epic's Medieval Village Megascans sample and Quixel's European Hornbeam (Weather Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Death Struggle: contract work for Dmitry Parkin, 2024–2025; original models and animation by other artists. Its 2026 presentation edition uses licensed Fab content (Skeleton Knight Modular, Undead Pack, Stylized Fantasy Creatures Bundle, ROG Modular Medieval Accessories and Robes, Cemetery Vol. 1, City of Brass: Enemies, Modular Gothic/Fantasy Environment, Quixel Megascans) and animation and audio from Epic's Lyra sample. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
   </div>
 </footer>
 
