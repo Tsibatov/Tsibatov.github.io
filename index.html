@@ -673,8 +673,12 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   <div class="wide media">
     <figure data-reveal>
       <div class="frame"><video controls preload="none" playsinline poster="assets/img/bridge-pres-poster.jpg" src="assets/video/bridge-pres.mp4" aria-label="Trestle Bridge presentation: shaping the path, live parameter changes and close-ups of the finished structure"></video></div>
-      <figcaption>36-second presentation: the path is shaped on the terrain, then length, deck width and support spacing change live, followed by timber and structure close-ups.</figcaption>
+      <figcaption>36-second presentation: the path is shaped on the terrain, then length, deck width and support spacing change live, followed by timber and structure close-ups in the canyon set.</figcaption>
     </figure>
+    <div class="row2" data-reveal>
+      <figure><div class="frame"><img src="assets/img/bridge-canyon-gorge.jpg" data-full alt="The trestle bridge spanning a red sandstone gorge, seen from the canyon floor" loading="lazy"></div><figcaption>Set: a red sandstone canyon built around the generated bridge. Terraces, talus and buttes are placed by script from the heightfield.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/bridge-canyon-vista.jpg" data-full alt="View along the deck into a deep canyon with buttes on the horizon" loading="lazy"></div><figcaption>The gorge opens into a 5 km backdrop. Buttes are assembled from scanned rock, not sculpted terrain.</figcaption></figure>
+    </div>
     <div class="row3" data-reveal>
       <figure><div class="frame"><img src="assets/img/bridge-deck.jpg" data-full alt="Close-up of the timber deck with varied boards" loading="lazy"></div><figcaption>Decking: aligned grain, end grain and per-board variation from one material.</figcaption></figure>
       <figure><div class="frame"><img src="assets/img/bridge-feet.jpg" data-full alt="Bridge legs standing on the terrain" loading="lazy"></div><figcaption>Feet: every leg is placed on the ground by a raycast against the terrain.</figcaption></figure>
@@ -701,11 +705,11 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
         <li>Output is eight organized mesh batches (decking, stringers, frames, bracing, hardware), with custom component meshes and seeded presets.</li>
         <li>Each member carries a vertex-colour payload as shader data, which gives the reference deck 158 distinct board variations without a material per board. Verified by reading the Unreal import back into Maya.</li>
       </ul></div>
-      <p class="scope">The live generator runs in Maya; Unreal receives baked static meshes. The video is an edited capture, not a real-time performance test.</p>
+      <p class="scope">The live generator runs in Maya; Unreal receives baked static meshes. The video is an edited capture, not a real-time performance test. Canyon scenery is Quixel Megascans via Fab, assembled for the showcase and not part of the tool.</p>
     </div>
     <dl class="spec" data-reveal>
       <dt>Built with</dt><dd>Maya 2026, Python API 2.0, PySide6</dd>
-      <dt>Engine side</dt><dd>UE 5.8, FBX, Sequencer, Movie Render Queue</dd>
+      <dt>Engine side</dt><dd>UE 5.8, FBX, Landscape, Nanite, Sequencer, Movie Render Queue</dd>
       <dt>Checks</dt><dd>Geometry and construction suite, Maya DG checks, 24 component meshes validated in Unreal</dd>
       <dt>Textures</dt><dd>Poly Haven, CC0; end grain and steel are procedural</dd>
     </dl>
