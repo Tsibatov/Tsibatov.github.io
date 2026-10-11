@@ -371,7 +371,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
 <main id="top">
 
 <section class="hero" id="hero">
-  <video src="assets/video/hero.mp4" poster="assets/img/poster-hero.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <video src="assets/video/hero-golden.mp4" poster="assets/img/poster-hero-golden.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <p class="now" aria-hidden="true"><span class="dot"></span>Live capture · Water Dynamics gorge · UE 5.8</p>
   <div class="hero-inner">
     <p class="kicker" data-reveal>Senior Technical Artist · Wargaming</p>
@@ -415,7 +415,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <p>Each project is a short case study: the problem, the approach, what was measured, and where the scope ends.</p>
     </div>
     <div class="bento">
-      <a class="card c4" href="#water" data-reveal><img src="assets/img/gorge-landing.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-water.mp4" muted loop playsinline preload="none"></video><span class="num">01</span><span class="tag">Simulation</span><span class="meta"><strong>Water Dynamics</strong><span>Rivers, lakes and waterfalls that react to what is in them.</span></span><span class="go" aria-hidden="true">→</span></a>
+      <a class="card c4" href="#water" data-reveal><img src="assets/img/gorge-golden-forest.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-water-golden.mp4" muted loop playsinline preload="none"></video><span class="num">01</span><span class="tag">Simulation</span><span class="meta"><strong>Water Dynamics</strong><span>Rivers, lakes and waterfalls that react to what is in them.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card c2t" href="#performance" data-reveal><img src="assets/img/prc-panel.jpg" alt="" loading="lazy" style="object-position:30% 50%"><video data-preview src="assets/video/p-prc.mp4" muted loop playsinline preload="none"></video><span class="num">02</span><span class="tag">Performance</span><span class="meta"><strong>Performance Regression Companion</strong><span>Did this content change make the scene slower?</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#weather" data-reveal><img src="assets/img/card-weather.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-weather.mp4" muted loop playsinline preload="none"></video><span class="num">03</span><span class="tag">Worldbuilding</span><span class="meta"><strong>Weather Dynamics</strong><span>Four seasons on one camera, with real accumulation.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card type" href="#pipeline" data-reveal><span class="big" aria-hidden="true">15</span><span class="num">04</span><span class="tag">Production</span><span class="meta"><strong>WoT: HEAT character pipeline</strong><span>Designed from scratch. Every character asset in the game goes through it.</span></span><span class="go" aria-hidden="true">→</span></a>
@@ -441,19 +441,19 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   </div>
   <div class="wide media">
     <figure data-reveal>
-      <div class="frame"><video controls preload="none" playsinline poster="assets/img/gorge-stylized-hero.jpg" src="assets/video/gorge.mp4"></video></div>
-      <figcaption>Gorge showcase, 64 s. 0:00–0:32 realistic look, 0:32–1:04 stylized: wide shot, waterfall landing, rapids, shallows, thrown stone. Recorded at a fixed simulation step, so it is not a frame-rate measurement.</figcaption>
+      <div class="frame"><video controls preload="none" playsinline poster="assets/img/gorge-golden-poster.jpg" src="assets/video/gorge-golden.mp4"></video></div>
+      <figcaption>Gorge at golden hour, 31 s. Low back light through the spruce canopy, volumetric shafts, spray that glows against the sun, and the live river and waterfalls underneath. Rendered in Unreal at 3840×2160 at the highest quality settings, at a fixed 30 Hz simulation step, joined with dissolves only, so it is not a frame-rate measurement. Sound: CC0 field recordings of a mountain torrent, a small waterfall and a forest brook (BigSoundBank), mixed per shot with birds and soft wind.</figcaption>
     </figure>
     <div class="row3" data-reveal>
-      <figure><div class="frame"><img src="assets/img/gorge-landing.jpg" data-full alt="Waterfall sheets landing in a green pool with foam and mist" loading="lazy"></div><figcaption>Waterfall landing: aerated sheets, foam and mist where they meet the pool.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/gorge-rapids.jpg" data-full alt="Rapids with white water breaking around boulders" loading="lazy"></div><figcaption>Rapids: foam forms behind obstacles and where the current shears.</figcaption></figure>
-      <figure><div class="frame"><img src="assets/img/gorge-shallows.jpg" data-full alt="Clear shallow water over gravel with refracted caustics" loading="lazy"></div><figcaption>Shallows: depth absorption, refraction and caustics on the bed.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/gorge-golden-reveal.jpg" data-full alt="Rapids leading to twin waterfalls under low sun shafts" loading="lazy"></div><figcaption>Rapids into the falls: foam forms behind obstacles and where the current shears, advected by the solved velocity.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/gorge-golden-glide.jpg" data-full alt="Twin waterfalls with glowing spray at the landing" loading="lazy"></div><figcaption>Landing: glassy tongues at the lip, aerated white water below, and spray that scatters the back light.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/gorge-golden-aerial.jpg" data-full alt="High view of the pool and falls crossed by light shafts" loading="lazy"></div><figcaption>From above: the upper river feeds the falls; the pool keeps its depth absorption and reflections.</figcaption></figure>
     </div>
     <div class="row2" data-reveal>
       <figure><div class="frame"><video src="assets/video/rock.mp4" poster="assets/img/poster-rock.jpg" muted loop playsinline preload="none" data-auto aria-label="A rock appears in a running river and the current re-routes around it"></video></div><figcaption>Earlier build (0.6): a test rock is switched on in a running river. Flow, foam and surface detail re-route around it. One unedited take.</figcaption></figure>
       <figure><div class="frame"><img src="assets/img/gorge-wetness.jpg" data-full alt="Four frames of a boulder whose wet band follows the water level up and down" loading="lazy"></div><figcaption>Wet line: the river level is raised 55 cm and lowered again. The wet band on the rock follows the water and dries over time.</figcaption></figure>
     </div>
-    <figure data-reveal><div class="frame"><img src="assets/img/gorge-before-after.jpg" data-full alt="Left: the original blockout scene. Right: the gorge after the environment pass" loading="lazy"></div><figcaption>The same water system before and after the environment pass: new composition, scanned scenery and lighting.</figcaption></figure>
+    <figure data-reveal><div class="frame"><img src="assets/img/gorge-golden-before-after.jpg" data-full alt="Left: the gorge in flat daylight. Right: the same camera in the golden-hour cinematic pass" loading="lazy"></div><figcaption>Same camera, same simulation: the earlier daylight pass and the cinematic pass (light, volumetric fog, water and foam shading).</figcaption></figure>
   </div>
   <div class="wrap detail">
     <div class="story" data-reveal>
@@ -467,13 +467,14 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
         <li>A wet-line material function follows the local water level, so banks and rocks darken where the water reaches and dry again over time.</li>
       </ul></div>
       <div class="block"><h3>For the artist</h3><p>One panel creates a river, lake or waterfall. Width, depth and flow speed are in real units. The artist switches between realistic and stylized looks, picks a waterbed (rocky, sandy, silty, algae), sets turbidity, and saves the result as a look preset for other water bodies.</p></div>
-      <p class="scope">Scope: authoring beta. 2.5D surface flow inside a finite domain, not a 3D FLIP or SPH volume. Profiled in the editor at 1080p and not yet tuned to a shipping budget. Showcase scenery is Quixel Megascans via Fab, used in the demo only and not shipped with the plugin.</p>
+      <p class="scope">Scope: 2.5D surface flow inside a finite domain, not a 3D FLIP or SPH volume. Profiled in the editor at 1080p and not yet tuned to a shipping budget. Showcase scenery is Quixel Megascans via Fab, used in the demo only and not shipped with the plugin.</p>
     </div>
     <dl class="spec" data-reveal>
       <dt>Built with</dt><dd>C++ runtime and editor modules, HLSL, Single Layer Water materials, Python scene assembly</dd>
       <dt>Engine</dt><dd>Unreal Engine 5.8.2, DX12 SM6</dd>
-      <dt>Showcase</dt><dd>Gorge level assembled by Python scripts; two looks, five shots each, captured at 1080p30</dd>
-      <dt>Version</dt><dd>0.8 authoring beta</dd>
+      <dt>Showcase</dt><dd>Gorge level assembled by Python scripts; golden-hour cinematic map with authored camera moves, plus daylight and stylized looks; captured at 1080p30</dd>
+      <dt>Version</dt><dd>1.0, UE 5.8 Win64, Fab release in preparation</dd>
+      <dt>Docs</dt><dd><a href="water-dynamics/">Plugin documentation</a></dd>
     </dl>
   </div>
 </section>
@@ -1007,7 +1008,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <span>Timur Sibatov · Senior Technical Artist · Belgrade</span>
       <span>Source code and longer breakdowns on request · <a href="https://www.linkedin.com/in/timmysib/">LinkedIn</a> · <a href="https://www.artstation.com/timmysib">ArtStation</a></span>
     </div>
-    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Epic's Medieval Village Megascans sample and Quixel's European Hornbeam (Weather Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Death Struggle: contract work for Dmitry Parkin, 2024–2025; original models and animation by other artists. Its 2026 presentation edition uses licensed Fab content (Skeleton Knight Modular, Undead Pack, Stylized Fantasy Creatures Bundle, ROG Modular Medieval Accessories and Robes, Cemetery Vol. 1, City of Brass: Enemies, Modular Gothic/Fantasy Environment, Quixel Megascans) and animation and audio from Epic's Lyra sample. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
+    <p class="credits">Third-party content in demo scenes: Quixel Megascans via Fab (Water Dynamics showcase), Epic's Medieval Village Megascans sample (Weather Dynamics showcase; bird and wind ambience in the Water Dynamics reel), BigSoundBank CC0 water and forest recordings (Water Dynamics reel) and Quixel's European Hornbeam (Weather Dynamics showcase), Poly Haven CC0 scans and textures, Epic's Lyra sample environment. Death Struggle: contract work for Dmitry Parkin, 2024–2025; original models and animation by other artists. Its 2026 presentation edition uses licensed Fab content (Skeleton Knight Modular, Undead Pack, Stylized Fantasy Creatures Bundle, ROG Modular Medieval Accessories and Robes, Cemetery Vol. 1, City of Brass: Enemies, Modular Gothic/Fantasy Environment, Quixel Megascans) and animation and audio from Epic's Lyra sample. Fortnite characters and game assets belong to Epic Games. These assets are used for presentation only and are not part of the tools. Fortnite is a trademark of Epic Games, Inc. World of Tanks is a trademark of Wargaming.</p>
   </div>
 </footer>
 
