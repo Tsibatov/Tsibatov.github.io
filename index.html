@@ -421,7 +421,7 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
       <a class="card type" href="#pipeline" data-reveal><span class="big" aria-hidden="true">15</span><span class="num">04</span><span class="tag">Production</span><span class="meta"><strong>WoT: HEAT character pipeline</strong><span>Designed from scratch. Every character asset in the game goes through it.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#bridge" data-reveal><img src="assets/img/card-bridge.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-bridge.mp4" muted loop playsinline preload="none"></video><span class="num">05</span><span class="tag">Procedural · Maya</span><span class="meta"><strong>Trestle Bridge</strong><span>Draw a path, get a bridge that fits the terrain.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#shaders" data-reveal><img src="assets/img/card-chars.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-chars.mp4" muted loop playsinline preload="none"></video><span class="num">06</span><span class="tag">Shaders</span><span class="meta"><strong>Fortnite character materials</strong><span>Effects rebuilt on the original game models.</span></span><span class="go" aria-hidden="true">→</span></a>
-      <a class="card" href="#liquids" data-reveal><img src="assets/img/card-liquid.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-liquid.mp4" muted loop playsinline preload="none"></video><span class="num">07</span><span class="tag">Shaders · physics</span><span class="meta"><strong>Liquid Props</strong><span>Liquid that keeps its volume when tilted.</span></span><span class="go" aria-hidden="true">→</span></a>
+      <a class="card" href="#liquids" data-reveal><img src="assets/img/card-liquid.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-liquid.mp4" muted loop playsinline preload="none"></video><span class="num">07</span><span class="tag">UE plugin · shaders · physics</span><span class="meta"><strong>Liquid Props</strong><span>Liquid for props: slosh, foam, bubbles, drink and pour.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card" href="#tools" data-reveal><img src="assets/img/prc-profile.jpg" alt="" loading="lazy"><span class="num">08</span><span class="tag">Editor tools</span><span class="meta"><strong>Pipeline tools</strong><span>Audits, batch materials, logic export.</span></span><span class="go" aria-hidden="true">→</span></a>
       <a class="card c6" href="#game" data-reveal><img src="assets/img/card-ds.jpg" alt="" loading="lazy"><video data-preview src="assets/video/p-ds.mp4" muted loop playsinline preload="none"></video><span class="num">09</span><span class="tag">Gameplay · UE5</span><span class="meta"><strong>Death Struggle</strong><span>A top-down action shooter: gameplay, enemy AI and UI in C++ and Blueprints.</span></span><span class="go" aria-hidden="true">→</span></a>
     </div>
@@ -820,33 +820,40 @@ dialog.lb button{position:fixed;top:16px;right:18px;font:500 13px var(--mono);le
   <div class="wrap case-head" data-reveal>
     <span class="case-num">07</span>
     <div>
-      <p class="eyebrow">Shaders · physics · Unreal Engine 5.8 plugin</p>
+      <p class="eyebrow">Unreal Engine 5.8 plugin · C++ · HLSL</p>
       <h2>Liquid Props</h2>
-      <p class="oneliner">Liquid in bottles and glasses that keeps its volume when tilted and reacts to motion and impacts.</p>
-      <ul class="tags"><li>C++</li><li>HLSL</li><li>Free surface</li><li>Foam &amp; bubbles</li></ul>
+      <p class="oneliner">Liquid for game props: it sloshes when carried, keeps its volume when tilted, foams, bubbles and can be drunk or poured from Blueprint.</p>
+      <ul class="tags"><li>C++</li><li>HLSL</li><li>Thin Translucent</li><li>Foam &amp; bubbles</li><li>Gameplay API</li></ul>
     </div>
   </div>
   <div class="wide media">
     <figure data-reveal>
       <div class="frame"><video controls preload="none" playsinline poster="assets/img/poster-liquid.jpg" src="assets/video/liquid.mp4"></video></div>
-      <figcaption>38-second showcase, captured from the Unreal runtime. The on-screen sliders are live controls.</figcaption>
+      <figcaption>Liquid Props 1.0 reel. Rendered with Movie Render Queue from the plugin's runtime simulation; the tavern set uses sample art that is not part of the plugin.</figcaption>
     </figure>
+    <div class="row3" data-reveal>
+      <figure><div class="frame"><img src="assets/img/liquid-foam.jpg" data-full alt="Cola foam at 0, 5 and 15 seconds: full head, first holes, a lace with a ring at the glass" loading="lazy"></div><figcaption>Foam collapse after a shake: the head opens from the centre into a lace and holds longest at the glass.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/liquid-lineup.jpg" data-full alt="Wine, cola, beer, sparkling water, still water and a potion on a backlit counter" loading="lazy"></div><figcaption>Six presets at real-world size; colour comes from light absorbed along the path through the liquid.</figcaption></figure>
+      <figure><div class="frame"><img src="assets/img/liquid-potion.jpg" data-full alt="A glowing green potion in a round flask on a dark counter" loading="lazy"></div><figcaption>Glowing potion with bubble chains; glass edges come from studio strip lights.</figcaption></figure>
+    </div>
   </div>
   <div class="wrap detail">
     <div class="story" data-reveal>
       <div class="block"><h3>Approach</h3><ul>
-        <li>A gravity-aligned free surface whose height is solved so the liquid keeps its volume under tilt. Per-frame telemetry records the surface normal and volume error.</li>
-        <li>Sloshing responds to translation and impulses, with artist-facing damping and viscosity.</li>
-        <li>Four recipes (wine, still water, cola, sparkling water) and four container shapes: carbonation bubbles, a foam head that forms with motion and decays, condensation and wall film.</li>
-        <li>Everything is a property on the actor: fill, tint, opacity, damping, viscosity, bubbles and foam. Artists never touch C++.</li>
+        <li>The free surface is a plane clipped against the container's inner volume and solved so the liquid keeps its volume under any tilt. Slosh frequency follows the first mode of the real container.</li>
+        <li>Glass and liquid use Thin Translucent shading with refraction. The liquid's colour is computed from the light path through it, so thick parts are deep and edges light.</li>
+        <li>Foam builds from motion, pouring and carbonation and breaks up into a lace in the material; bubbles rise in chains from nucleation sites and grow as they go.</li>
+        <li>A gameplay API (drink, pour, shake, knock, on-empty event) makes the liquid part of the game, not only decoration. Settled containers sleep.</li>
       </ul></div>
+      <div class="block"><h3>From portfolio study to product</h3><p>The first version was a portfolio study at four to five times real size with unlit liquids. Version 1.0 rebuilds the glass, liquid shading and foam, adds real-scale presets and a source-only package that builds cleanly for Fab.</p></div>
       <div class="block"><h3>Connection</h3><p>The <a href="#performance">performance case</a> came from this project: the Companion localized the foam-mesh rebuild that dominated the game thread in a dense scene of these props.</p></div>
-      <p class="scope">Scope: a planar sloshing surface with approximate absorption and artistic viscosity, not a general fluid solver. The video uses a fixed simulation step and is not a frame-rate claim.</p>
+      <p class="scope">Scope: containers are surfaces of revolution with a closed volume; no pouring out or fluid simulation. The reel uses a fixed simulation step and is not a frame-rate claim.</p>
     </div>
     <dl class="spec" data-reveal>
-      <dt>Built with</dt><dd>C++ actor, HLSL materials, Blueprint-exposed parameters</dd>
-      <dt>Engine</dt><dd>Unreal Engine 5.8.2, DX12 SM6</dd>
-      <dt>Artist kit</dt><dd>4 recipes, 4 container shapes, interactive lab level</dd>
+      <dt>Built with</dt><dd>C++ runtime module, HLSL materials, Blueprint API</dd>
+      <dt>Engine</dt><dd>Unreal Engine 5.8.2, DX12 SM6, Lumen</dd>
+      <dt>Artist kit</dt><dd>6 presets, 7 container shapes, 3 example maps</dd>
+      <dt>Status</dt><dd>1.0 packaged for Fab</dd>
     </dl>
   </div>
 </section>
