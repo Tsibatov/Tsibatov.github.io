@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Liquid Props · Documentation</title>
-<meta name="description" content="Documentation and support for Liquid Props, a real-time liquid plugin for bottles, glasses and flasks in Unreal Engine 5.8.">
+<meta name="description" content="Documentation and support for Liquid Props, a real-time liquid plugin for flasks, bottles and jars in Unreal Engine 5.8.">
 <meta name="theme-color" content="#050708">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,11 +91,11 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
   <main>
     <p class="eyebrow">Unreal Engine 5.8 plugin · Documentation</p>
     <h1>Liquid Props</h1>
-    <p class="lede">Liquid inside bottles, glasses and flasks. The liquid keeps its volume when the container moves or tilts, sloshes and settles, builds a foam head that collapses over time, releases bubble chains, wets the wall and is seen through physically based glass. C++ source is included.</p>
+    <p class="lede">Liquid inside flasks, bottles and jars. The liquid keeps its volume when the container moves or tilts, sloshes and settles, builds foam that collapses over time, releases bubble chains, wets the wall and is seen through physically based glass. C++ source is included.</p>
     <ul class="facts"><li>UE 5.8 · Win64</li><li>C++ source</li><li>6 presets</li><li>7 container shapes</li><li>3 example maps</li></ul>
     <figure>
-      <img src="../assets/img/poster-liquid.jpg" alt="A pint of beer with a foam head, a green potion flask and a wine bottle on a tavern table" width="1280" height="720">
-      <figcaption>Tavern scene from the reel. The environment art is not part of the plugin.</figcaption>
+      <img src="../assets/img/liquid-presets-v11.jpg" alt="Four containers on a backlit studio counter: sparkling water, a violet berry elixir in a small round flask, a glowing green potion and a foaming turquoise potion in a wide jar" width="1080" height="607">
+      <figcaption>The six presets in the plugin's L_PresetGallery example map, rendered with Movie Render Queue.</figcaption>
     </figure>
 
     <section id="overview">
@@ -103,11 +103,11 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <p>Liquid Props is a runtime actor, <code>ALiquidPropActor</code>, that builds the container, the liquid volume, the glass, the foam head and the bubbles procedurally. Presets are Blueprints at real-world size, so you can drop them into a level and play.</p>
       <h3>Where it fits</h3>
       <ul class="list">
-        <li><strong>Props the player picks up</strong>: first-person, immersive-sim and horror games. A carried bottle sloshes, settles when put down and keeps its volume when tilted.</li>
-        <li><strong>Drinking and potions as gameplay</strong>: bind the fill to a health or mana value, call <code>ChangeAmount</code> when the player drinks, react to <code>OnEmptied</code>.</li>
-        <li><strong>Bar, tavern, kitchen and cooking sims</strong>: pour with <code>ChangeAmount</code>; beer keeps a head, cola foams up when shaken and the head collapses on its own.</li>
-        <li><strong>Alchemy and crafting</strong>: change <code>LiquidColor</code> and <code>InnerGlow</code> as ingredients are mixed.</li>
-        <li><strong>Set dressing</strong>: shelves of bottles at real scale. A settled container sleeps and costs nothing per frame.</li>
+        <li><strong>Props the player picks up</strong>: first-person, immersive-sim and horror games. A carried flask sloshes, settles when put down and keeps its volume when tilted.</li>
+        <li><strong>Potions as gameplay</strong>: bind the fill to a health or mana value, call <code>ChangeAmount</code> when the player uses a potion, react to <code>OnEmptied</code>.</li>
+        <li><strong>Crafting, cooking and lab sims</strong>: refill with <code>ChangeAmount</code>; a foaming potion keeps its froth, cola foams up when shaken and the foam collapses on its own.</li>
+        <li><strong>Alchemy and sci-fi</strong>: change <code>LiquidColor</code> and <code>InnerGlow</code> as ingredients are mixed; coolant tanks whose level is the gauge.</li>
+        <li><strong>Set dressing</strong>: shelves of flasks and jars at real scale. A settled container sleeps and costs nothing per frame.</li>
         <li><strong>Cinematics</strong>: Movie Render Queue close-ups with refraction, absorption, foam and bubbles.</li>
       </ul>
     </section>
@@ -125,10 +125,10 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
     <section id="tour">
       <h2>Five-minute tour</h2>
       <ol class="list">
-        <li>Open <code>/LiquidProps/Maps/L_BeverageLab</code> and press Play. Six presets stand on a lit counter.</li>
-        <li>Controls in the example maps: <kbd>1</kbd>–<kbd>9</kbd> / <kbd>Tab</kbd> select, <kbd>Space</kbd> preview motion, <kbd>K</kbd> slosh, <kbd>F</kbd> shake (foam), <kbd>E</kbd> / <kbd>Q</kbd> drink / pour, <kbd>H</kbd> knock, <kbd>↑</kbd> <kbd>↓</kbd> fill, <kbd>←</kbd> <kbd>→</kbd> tilt, <kbd>R</kbd> reset, <kbd>A</kbd> <kbd>D</kbd> orbit, <kbd>W</kbd> <kbd>S</kbd> zoom.</li>
+        <li>Open <code>/LiquidProps/Maps/L_PresetGallery</code> and press Play. Six presets stand on a lit counter.</li>
+        <li>Controls in the example maps: <kbd>1</kbd>–<kbd>9</kbd> / <kbd>Tab</kbd> select, <kbd>Space</kbd> preview motion, <kbd>K</kbd> slosh, <kbd>F</kbd> shake (foam), <kbd>E</kbd> / <kbd>Q</kbd> use / refill, <kbd>H</kbd> knock, <kbd>↑</kbd> <kbd>↓</kbd> fill, <kbd>←</kbd> <kbd>→</kbd> tilt, <kbd>R</kbd> reset, <kbd>A</kbd> <kbd>D</kbd> orbit, <kbd>W</kbd> <kbd>S</kbd> zoom.</li>
         <li><code>/LiquidProps/Maps/L_ContainerGallery</code> shows the container shapes; <code>/LiquidProps/Maps/L_LiquidLab</code> shows three fill levels and the preview motion loop.</li>
-        <li>Drag <code>Blueprints/Drinks/BP_Beer</code> into your level. Change <strong>Fill Amount</strong> and <strong>Liquid Recipe</strong> in Details; the recipe applies immediately and keeps your fill level and container size.</li>
+        <li>Drag <code>Blueprints/Presets/BP_Potion</code> into your level. Change <strong>Fill Amount</strong> and <strong>Liquid Recipe</strong> in Details; the recipe applies immediately and keeps your fill level and container size.</li>
       </ol>
       <p class="note">The example maps use their own game mode through World Settings → GameMode Override.</p>
     </section>
@@ -139,22 +139,22 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <div class="table"><table>
         <thead><tr><th>Blueprint</th><th>Shape</th><th>Radius × height</th><th>Volume</th></tr></thead>
         <tbody>
-          <tr><td>BP_Wine</td><td>Long-neck bottle</td><td>3.6 × 29.5</td><td>~740 ml</td></tr>
-          <tr><td>BP_Cola</td><td>Shoulder bottle</td><td>3.3 × 20</td><td>~490 ml</td></tr>
-          <tr><td>BP_Beer</td><td>Tapered pint</td><td>4.3 × 14.5</td><td>~570 ml</td></tr>
-          <tr><td>BP_SparklingWater</td><td>Highball</td><td>3.1 × 13</td><td>~390 ml</td></tr>
-          <tr><td>BP_StillWater</td><td>Tumbler</td><td>4.0 × 9</td><td>~305 ml</td></tr>
           <tr><td>BP_Potion</td><td>Round flask</td><td>4.5 × 15.3</td><td>~410 ml</td></tr>
+          <tr><td>BP_BerryElixir</td><td>Round flask</td><td>3.8 × 12.9</td><td>~250 ml</td></tr>
+          <tr><td>BP_FoamingPotion</td><td>Wide jar</td><td>4.4 × 10</td><td>~600 ml</td></tr>
+          <tr><td>BP_Cola</td><td>Shoulder bottle</td><td>3.3 × 20</td><td>~490 ml</td></tr>
+          <tr><td>BP_SparklingWater</td><td>Cylinder</td><td>3.1 × 13</td><td>~390 ml</td></tr>
+          <tr><td>BP_StillWater</td><td>Tapered glass</td><td>4.0 × 9</td><td>~305 ml</td></tr>
         </tbody>
       </table></div>
-      <p class="note"><code>Blueprints/Shapes</code> contains the container shapes with neutral liquids. The <strong>Inner Volume Milliliters</strong> diagnostic shows the volume of any container. Recipes: Wine, Cola, Sparkling Water, Still Water, Beer, Potion, Custom. A recipe changes only the liquid: colour, absorption, foam, bubbles and motion character.</p>
+      <p class="note"><code>Blueprints/Shapes</code> contains the container shapes with neutral liquids. The <strong>Inner Volume Milliliters</strong> diagnostic shows the volume of any container. Recipes: Potion, Berry Elixir, Foaming Potion, Cola, Sparkling Water, Still Water, Custom. A recipe changes only the liquid: colour, absorption, foam, bubbles and motion character.</p>
     </section>
 
     <section id="own-prop">
       <h2>Add liquid to your own prop</h2>
       <h3>Option A: use the built-in glass</h3>
       <p>Add a <code>LiquidPropActor</code> Blueprint or a preset as a child of your prop, or add the <strong>Liquid Container</strong> component to your Actor Blueprint and choose a preset as its Child Actor Class. Use <code>Get Liquid Container</code> to reach the liquid from Blueprint.</p>
-      <h3>Option B: your own bottle mesh</h3>
+      <h3>Option B: your own container mesh</h3>
       <ol class="list">
         <li>Turn off <strong>Show Glass</strong> on the liquid.</li>
         <li>Set <strong>Container Shape</strong> to the closest built-in shape, or to <strong>Custom</strong> and enter <strong>Custom Profile</strong> points: X is height 0..1 from the bottom, Y is radius 0..1 of Radius; at least two points with increasing X.</li>
@@ -168,12 +168,12 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <div class="table"><table>
         <thead><tr><th>Goal</th><th>Blueprint</th></tr></thead>
         <tbody>
-          <tr><td>Drink a sip</td><td><code>ChangeAmount(-50, 0.6)</code> (millilitres, seconds)</td></tr>
-          <tr><td>Pour in</td><td><code>ChangeAmount(+200, 1.5)</code>; beer and cola foam up while pouring</td></tr>
+          <tr><td>Use a dose</td><td><code>ChangeAmount(-50, 0.6)</code> (millilitres, seconds)</td></tr>
+          <tr><td>Refill</td><td><code>ChangeAmount(+200, 1.5)</code>; foaming liquids froth up while refilling</td></tr>
           <tr><td>Health potion</td><td>Set Fill from the health ratio, or <code>SetAmountMilliliters</code></td></tr>
-          <tr><td>Shake the bottle</td><td><code>Agitate(1)</code> on your shake input</td></tr>
-          <tr><td>Bottle hits the table</td><td><code>Impact(HitNormal, Strength)</code> from the prop's OnHit</td></tr>
-          <tr><td>Bottle is empty</td><td>Bind to <code>OnEmptied</code></td></tr>
+          <tr><td>Shake the flask</td><td><code>Agitate(1)</code> on your shake input</td></tr>
+          <tr><td>Flask hits the table</td><td><code>Impact(HitNormal, Strength)</code> from the prop's OnHit</td></tr>
+          <tr><td>Flask is empty</td><td>Bind to <code>OnEmptied</code></td></tr>
         </tbody>
       </table></div>
     </section>
@@ -185,8 +185,8 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
         <tbody>
           <tr><td>Rebuild</td><td>Rebuilds geometry after changing size, shape or segments at runtime</td></tr>
           <tr><td>Kick (Impulse)</td><td>Adds a slosh impulse</td></tr>
-          <tr><td>Agitate (Strength)</td><td>Adds foam as if the drink was shaken or poured</td></tr>
-          <tr><td>Change Amount (Milliliters, Seconds)</td><td>Drinks or pours over time; fires On Emptied / On Filled</td></tr>
+          <tr><td>Agitate (Strength)</td><td>Adds foam as if the liquid was shaken or poured</td></tr>
+          <tr><td>Change Amount (Milliliters, Seconds)</td><td>Uses up or refills over time; fires On Emptied / On Filled</td></tr>
           <tr><td>Set / Get Amount Milliliters</td><td>Reads or sets the amount in millilitres</td></tr>
           <tr><td>Impact (Direction, Strength)</td><td>Slosh and foam from a hit</td></tr>
           <tr><td>Reset Simulation</td><td>Stops all motion and clears foam and bubbles</td></tr>
@@ -204,12 +204,12 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
         <li><strong>02 Motion</strong>: Acceleration and Rotation Response, Physical Frequency (on by default: the first sloshing mode of the real container) with Frequency Multiplier, Damping, Viscosity, Max Slope.</li>
         <li><strong>03 Container</strong>: Container Shape, Radius, Height, Custom Profile, Segments.</li>
         <li><strong>04 Glass</strong>: Show Glass, Glass Thickness, Glass Base Thickness, Glass Tint, Glass Roughness, Glass Refraction, Contact Shadow Strength.</li>
-        <li><strong>05 Foam</strong>: Foam Amount, Start Foam (freshly poured), Foam Thickness, Foam Generation, Carbonation Foam Rate (continuous head, e.g. beer), Foam Half Life, Foam Bubble Scale, Foam Color.</li>
+        <li><strong>05 Foam</strong>: Foam Amount, Start Foam (foam when play starts), Foam Thickness, Foam Generation, Carbonation Foam Rate (continuous froth, as in the Foaming Potion), Foam Half Life, Foam Bubble Scale, Foam Color.</li>
         <li><strong>06 Bubbles</strong>: Bubble Amount, Bubble Rise Speed, Bubble Radius (at birth; bubbles grow while rising), Nucleation Sites.</li>
         <li><strong>08 Preview</strong> (advanced): Animate (preview motion loop in Play), Pause When Offscreen.</li>
       </ul>
       <h3>Wall film and drops</h3>
-      <p>Place a <code>LiquidWallWetness</code> actor and set <strong>Container</strong>, or call <strong>Initialize</strong> with your liquid in BeginPlay. Film Amount controls the wetted film, Condensation Amount the drops, Wine Legs Strength the film that clings after the liquid recedes.</p>
+      <p>Place a <code>LiquidWallWetness</code> actor and set <strong>Container</strong>, or call <strong>Initialize</strong> with your liquid in BeginPlay. Film Amount controls the wetted film, Condensation Amount the drops, Film Retention the film that clings after the liquid recedes (syrups, oils).</p>
     </section>
 
     <section id="rendering">
@@ -227,7 +227,7 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <h2>Performance</h2>
       <ul class="list">
         <li>A settled container sleeps: no mesh rebuilds and no material updates. Motion, Fill changes, Kick or Agitate wake it.</li>
-        <li>Carbonated drinks keep updating bubbles while on screen. With <strong>Pause When Offscreen</strong> (on by default) they stop when not rendered. Turn it off for Movie Render Queue renders.</li>
+        <li>Bubbling liquids keep updating bubbles while on screen. With <strong>Pause When Offscreen</strong> (on by default) they stop when not rendered. Turn it off for Movie Render Queue renders.</li>
         <li>Geometry is rebuilt on the CPU while a container moves; plan for a handful of moving containers at a time and many resting ones.</li>
       </ul>
     </section>
@@ -243,8 +243,10 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
 
     <section id="changelog">
       <h2>Changelog</h2>
+      <h3>1.1.0</h3>
+      <p>Presets for potions and lab glass: new Berry Elixir and Foaming Potion presets and recipes; presets moved to <code>Blueprints/Presets</code>; the preset example map is now <code>L_PresetGallery</code>; the wall-film setting is now Film Retention; new plugin icon. The renamed presets, recipes and setting have no redirects: if a level saved with 1.0.0 uses one of the renamed presets, place it again from <code>Blueprints/Presets</code>.</p>
       <h3>1.0.0</h3>
-      <p>Real-world-scale presets with Beer and Potion; round flask and custom profiles; physically based glass with refraction and a thick base; liquid absorption along the light path; meniscus; foam head with a side band against the glass, wall ring and lace break-up; bubble chains from nucleation sites; contact shadow; sleep at rest; example maps; recipes apply in the editor on change.</p>
+      <p>Real-world-scale presets; round flask and custom profiles; physically based glass with refraction and a thick base; liquid absorption along the light path; meniscus; foam head with a side band against the glass, wall ring and lace break-up; bubble chains from nucleation sites; contact shadow; sleep at rest; example maps; recipes apply in the editor on change.</p>
     </section>
 
     <section id="support">
@@ -255,7 +257,7 @@ footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--rule);font-si
       </div>
     </section>
 
-    <footer>Liquid Props by Timur Sibatov. Environment art shown in images is not included in the plugin.</footer>
+    <footer>Liquid Props by Timur Sibatov.</footer>
   </main>
 </div>
 </body>
